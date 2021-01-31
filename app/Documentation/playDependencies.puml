@@ -1,0 +1,31 @@
+@startuml
+!include Declarations.puml!Instrument
+!include Declarations.puml!Player
+!include Declarations.puml!SampleManager
+!include Declarations.puml!TriggerManager
+!include Declarations.puml!Playable
+!include Declarations.puml!SampleLayer
+!include Declarations.puml!TriggerZone
+!include Declarations.puml!ZoneLayer
+!include Declarations.puml!SampleLayer
+!include Declarations.puml!SampleGroup
+!include Declarations.puml!LayerLogic
+!include Declarations.puml!TriggerGraph
+!include Declarations.puml!SampleLibrary
+
+Instrument .> Player
+Player ..> SampleManager
+Player ..> TriggerManager
+Player ..> Playable: weak
+
+SampleManager ..> SampleLibraryFactory
+SampleLibraryFactory ..> SampleGroup
+SampleGroup ..> SampleLayer
+SampleLayer ..> LayerLogic
+SampleLayer ..> Playable
+
+TriggerManager ..> TriggerGraph
+TriggerGraph ..> TriggerZone
+TriggerZone ..> ZoneLayer
+
+@enduml

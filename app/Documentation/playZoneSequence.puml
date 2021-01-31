@@ -1,0 +1,14 @@
+@startuml
+-->Instrument: onTouch()
+
+Instrument->Player++: play(Point)
+Player->TriggerManager++: computeZoneLayer(Point)
+TriggerManager->TriggerGraphFactory++: invokeLayer(Point)
+TriggerGraphFactory->TriggerZone++: invokeLayer(Point)
+TriggerZone->ZoneLayer++: getLayer(Point)
+return ZoneLayer
+return ZoneLayer
+return ZoneLayer
+return ZoneLayer
+Player->: computeSample()
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+-->Instrument: onTouch()
+
+
+Instrument->Player++: play(Point)
+Player->TriggerManager++: computeZoneLayer(Point)
+return ZoneLayer
+Player->Player++:startThread()
+
+
+Player->SampleManager++: computeSample(ZoneLayer)
+SampleManager->SampleLibraryFactory++: invokeLayer(ZoneLayer)
+SampleLibraryFactory->SampleGroup++: invokeLayer(ZoneLayer)
+SampleGroup->SampleLayer++: invokeSample()
+SampleLayer->LayerLogic++:computeID()
+LayerLogic->LayerLogic++:addInstance()
+deactivate
+return SampleID
+SampleLayer->Playable++:getPlayable(SampleID)
+Playable->Playable:moveToBusy()
+
+
+return Playable
+return Playable
+return Playable
+return Playable
+return Playable
+
+
+Player->Playable++: play()
+return
+Player->Playable++: finish()
+Playable->Playable: moveToAvail()
+return done
+deactivate
+return done
+@enduml

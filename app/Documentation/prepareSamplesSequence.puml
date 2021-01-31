@@ -1,0 +1,44 @@
+@startuml
+Instrument->Instrument++: init()
+
+Instrument->ResourceManager++: prepareSnapshot()
+ResourceManager->: analyzeFiles()
+ResourceManager<--
+
+return
+Instrument->SampleLibraryFactory++: SampleLibraryFactory()
+SampleLibraryFactory-> SampleLibraryFactory++: prepareSamples()
+SampleLibraryFactory->ResourceManager++: getGroupCount()
+return Int
+
+loop forEachGroupInSnapshot
+SampleLibraryFactory->SampleGroup++: SampleGroup()
+return new
+SampleLibraryFactory->ResourceManager++: getLayerCount(group: Int)
+return Int
+loop forEachLayerInGroup
+SampleLibraryFactory->SampleLayer++: SampleLayer()
+return new
+SampleLibraryFactory->ResourceManager++: getRoundRobinCount(group: Int, layer: Int)
+return Int
+loop forEachSampleInLayer
+SampleLibraryFactory->Playable++: Playable()
+Playable->Playable++: init()
+Playable->ResourceManager++: getResource()
+return
+deactivate
+return new
+SampleLibraryFactory->SampleLayer++: addSample(Playable)
+return
+end loop
+SampleLibraryFactory->SampleGroup++:addLayer(SampleLayer)
+return
+end loop
+SampleLibraryFactory->SampleLibraryFactory++: addGroup(SampleGroup)
+deactivate
+end loop
+deactivate
+deactivate
+return SampleLibraryFactory
+
+@enduml

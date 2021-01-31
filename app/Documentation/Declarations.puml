@@ -1,0 +1,276 @@
+@startuml(id=SampleLibrary)
+interface SampleLibrary{
++invokeLayer(): Playable
+}
+@enduml
+
+
+@startuml(id=V1SampleLibrary)
+class V1SampleLibrary<<SampleLibrary>>{
+
+}
+@enduml
+
+
+@startuml(id=SampleLibraryFactory)
+class SampleLibraryFactory{
++prepareSamples()
+}
+@enduml
+
+
+@startuml(id=TriggerGraph)
+interface TriggerGraph{
++invokeLayer(): Playable
+}
+@enduml
+
+@startuml(id=V1TriggerGraph)
+class V1TriggerGraph<<TriggerGraph>>{
+
+}
+@enduml
+
+@startuml(id=TriggerGraphFactory)
+class TriggerGraphFactory{
++{static}prepareTriggers()
+}
+@enduml
+
+
+'''
+
+
+
+@startuml(id=Instrument)
+class Instrument{
+-ResourceManager
+-Player
+init()
+}
+@enduml
+
+
+@startuml(id=ResourceManagerFactory)
+class ResourceManagerFactory{
+{static} getResourceManagerInstance(): ResourceManager
+}
+@enduml
+
+
+@startuml(id=ResourceManager)
+interface ResourceManager{
+
++ prepareSnapshot()
+- analyzeFiles()
++ getGroupCount()
++ getLayerCount(group: Int)
++ getRoundRobinCount(group: Int, layer: Int)
++ getResource(group: Int, layer: Int, roundRobin: Int)
+}
+@enduml
+
+@startuml(id=SimpleResourceManager)
+class SimpleResourceManager<<ResourceManager>>{
+directorySnapshot
+init()
+}
+@enduml
+
+
+@startuml(id=TriggerManager)
+interface TriggerManager{
+prepareTriggerManager()
+computeZoneLayer(Point): ZoneLayer
+}
+@enduml
+
+
+@startuml(id=SimpleTriggerManager)
+class SimpleTriggerManager<<TriggerManager>>{
+TriggerGraph
+}
+@enduml
+
+
+
+@startuml(id=TriggerZone)
+interface TriggerZone{
+invokeLayer(Point): ZoneLayer
+}
+@enduml
+
+
+@startuml(id=HeadZone)
+class HeadZone<<HeadZone>>{
+
+}
+@enduml
+
+
+@startuml(id=RimZone)
+class RimZone<<HeadZone>>{
+
+}
+@enduml
+
+
+@startuml(id=ZoneLayer)
+interface ZoneLayer{
+getLayer(Point): ZoneLayer
+}
+@enduml
+
+
+@startuml(id=HeadZoneLayer)
+class HeadZoneLayer<<ZoneLayer>>{
+
+}
+@enduml
+
+
+@startuml(id=RimZoneLayer)
+class RimZoneLayer<<ZoneLayer>>{
+
+}
+@enduml
+
+
+@startuml(id=PlayerFactory)
+class PlayerFactory{
+
++{static} getInstance(TriggerManager, SampleManager)
+}
+@enduml
+
+
+@startuml(id=Player)
+interface Player{
++invokePlayable(): Playable
+-startThread()
+-play(Playable)
+}
+@enduml
+
+
+
+@startuml(id=SimplePlayer)
+class SimplePlayer<<Player>>{
+-TriggerManager
+-SampleManager
+}
+@enduml
+
+
+
+@startuml(id=LayerLogic)
+interface LayerLogic{
+computeID(): SampleID
+addInstance(SampleID)
+}
+@enduml
+
+
+@startuml(id=SimpleLayerLogic)
+class SimpleLayerLogic<<LayerLogic>>{
+history: Queue<SampleID>
+
+}
+@enduml
+
+
+@startuml(id=SampleManager)
+interface SampleManager{
++computeSample(ZoneLayer): Playable
++invokeSampleGroup(ZoneLayer): Playable
++prepareSampleManager()
+}
+@enduml
+
+
+@startuml(id=SimpleSampleManager)
+class SimpleSampleManager<<SampleManager>>{
+-layers: Map<ZoneLayer, SampleLayer>
+}
+@enduml
+
+
+@startuml(id=SampleGroup)
+interface SampleGroup{
+invokeLayer(): Playable
+}
+@enduml
+
+
+@startuml(id=HeadSampleGroup)
+class HeadSampleGroup<<SampleGroup>>{
+
+}
+@enduml
+
+
+@startuml(id=RimSampleGroup)
+class RimSampleGroup<<SampleGroup>>{
+
+}
+@enduml
+
+
+@startuml(id=SampleLayer)
+interface SampleLayer{
++invokeSample(): Playable
++addSample(Playable)
+}
+@enduml
+
+
+@startuml(id=HeadSampleLayer)
+class HeadSampleLayer<<SampleLayer>>{
+samplesThisLayer: Map<SampleID, Playable>
+}
+@enduml
+
+
+@startuml(id=RimSampleLayer)
+class RimSampleLayer<<SampleLayer>>{
+samplesThisLayer: Map<SampleID, Playable>
+}
+@enduml
+
+
+@startuml(id=SampleID)
+interface SampleID{
+
+}
+@enduml
+
+
+@startuml(id=SampleCoords)
+class SampleCoords<<SampleID>>{
+layer: Int
+roundRobin: Int
+}
+@enduml
+
+
+@startuml(id=Playable)
+interface Playable{
+-createPlayer()
++play()
++getPlayable(): Playable
++getSampleID(): SampleID
+}
+@enduml
+
+
+@startuml(id=V1Sample)
+class V1Sample<<Playable>>{
+context: Context
+sampleID: SampleID
+resourceID: Int
+{field} availPlayers: Queue<MediaPlayer> (or ExoPlayer)
+{field} busyPlayers: Queue<MediaPlayer> (or ExoPlayer)
+moveToBusy()
+}
+@enduml
+

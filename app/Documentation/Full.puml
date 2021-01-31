@@ -1,0 +1,90 @@
+@startuml
+
+!include Declarations.puml!ResourceManagerFactory
+!include Declarations.puml!SampleLibrary
+!include Declarations.puml!TriggerGraph
+!include Declarations.puml!V1SampleLibrary
+!include Declarations.puml!V1TriggerGraph
+!include Declarations.puml!Instrument
+!include Declarations.puml!ResourceManagerFactory
+!include Declarations.puml!ResourceManager
+!include Declarations.puml!SimpleResourceManager
+!include Declarations.puml!TriggerGraphFactory
+!include Declarations.puml!TriggerManager
+!include Declarations.puml!SimpleTriggerManager
+!include Declarations.puml!SampleLibraryFactory
+!include Declarations.puml!TriggerManager
+!include Declarations.puml!TriggerZone
+!include Declarations.puml!HeadZone
+!include Declarations.puml!RimZone
+!include Declarations.puml!ZoneLayer
+!include Declarations.puml!HeadZoneLayer
+!include Declarations.puml!RimZoneLayer
+!include Declarations.puml!Player
+!include Declarations.puml!SimplePlayer
+!include Declarations.puml!PlayerFactory
+!include Declarations.puml!LayerLogic
+!include Declarations.puml!SimpleLayerLogic
+!include Declarations.puml!SampleManager
+!include Declarations.puml!SimpleSampleManager
+!include Declarations.puml!SampleGroup
+!include Declarations.puml!HeadSampleGroup
+!include Declarations.puml!RimSampleGroup
+!include Declarations.puml!SampleLayer
+!include Declarations.puml!HeadSampleLayer
+!include Declarations.puml!RimSampleLayer
+!include Declarations.puml!SampleID
+!include Declarations.puml!SampleCoords
+!include Declarations.puml!Playable
+!include Declarations.puml!HeadSample
+
+Instrument .> ResourceManagerFactory
+PlayerFactory <. Instrument
+TriggerGraphFactory <.. Instrument
+SampleLibraryFactory <.. Instrument
+
+ResourceManager <|.. SimpleResourceManager
+Player <|.. SimplePlayer
+TriggerProvider <|.. SimpleTriggerProvider
+SampleProvider <|.. SimpleSampleProvider
+TriggerManager <|.. SimpleTriggerManager
+SampleManager <|.. SimpleSampleManager
+TriggerGraph <|.. V1TriggerGraph
+TriggerZone <|.. HeadZone
+TriggerZone <|.. RimZone
+SampleLibrary <.. V1SampleLibrary
+SampleGroup <|.. HeadSampleGroup
+SampleGroup <|.. RimSampleGroup
+ZoneLayer <|.. HeadZoneLayer
+ZoneLayer <|.. RimZoneLayer
+SampleLayer <|.. HeadSampleLayer
+SampleLayer <|.. RimSampleLayer
+LayerLogic <|.. SimpleLayerLogic
+Playable <|.. HeadSample
+SampleID <|.. SampleCoords
+
+Instrument *-- ResourceManager
+Instrument *-- Player
+
+Player *-- TriggerManager
+Player *-- SampleManager
+
+SimpleTriggerManager *-- SimpleTriggerProvider
+SimpleSampleManager *-- SimpleSampleProvider
+
+HeadSample *- SampleID
+HeadSampleGroup *-- SampleLayer 
+RimSampleGroup *-- SampleLayer 
+HeadZone *-- ZoneLayer
+RimZone *-- ZoneLayer
+
+SimpleSampleManager o-- ZoneLayer
+SimpleSampleManager o-- SampleLayer
+
+HeadSampleLayer o-- SampleID
+HeadSampleLayer o-- Playable
+RimSampleLayer o-- SampleID
+RimSampleLayer o-- Playable
+SimpleLayerLogic o-- SampleID
+hide members
+@enduml
