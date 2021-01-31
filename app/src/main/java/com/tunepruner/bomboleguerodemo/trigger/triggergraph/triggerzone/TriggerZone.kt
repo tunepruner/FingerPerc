@@ -5,4 +5,5 @@ import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelaye
 
 interface TriggerZone {
     fun invokeLayer(point: Point): ZoneLayer
+    fun addLayer(triggerLayer: ZoneLayer)
 }

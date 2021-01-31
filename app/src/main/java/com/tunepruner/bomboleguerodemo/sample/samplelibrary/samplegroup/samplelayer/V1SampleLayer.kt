@@ -3,7 +3,7 @@ package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplel
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.Playable
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.SampleID
 
-class HeadSampleLayer: SampleLayer {
+class V1SampleLayer: SampleLayer {
 
     lateinit var samplesThisLayer: Map<SampleID, Playable>
 

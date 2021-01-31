@@ -1,10 +1,20 @@
 package com.tunepruner.bomboleguerodemo.instrument
 
-interface ResourceManager {
-    fun prepareSnapshot()
-    fun analyzeFiles()
-    fun getGroupCount()
-    fun getLayerCount(group: Int)
-    fun getRoundRobinCount(group: Int, layer: Int)
-    fun getResource(group: Int, layer: Int, roundRobin: Int)
+class ResourceManager {
+    companion object {
+        fun prepareSnapshot(){}
+        fun analyzeFiles(){}
+        fun getGroupCount(): Int{
+            TODO("Not implemented")
+        }
+        fun getLayerCount(group: Int): Int{
+            TODO("Not implemented")
+        }
+        fun getRoundRobinCount(group: Int, layer: Int): Int{
+            TODO("Not implemented")
+        }
+        fun getResource(group: Int, layer: Int, roundRobin: Int): String{
+            TODO("Not implemented")
+        }
+    }
 }

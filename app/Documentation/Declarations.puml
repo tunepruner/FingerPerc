@@ -14,7 +14,7 @@ class V1SampleLibrary<<SampleLibrary>>{
 
 @startuml(id=SampleLibraryFactory)
 class SampleLibraryFactory{
-+prepareSamples()
++prepareSamples(): SampleLibrary
 }
 @enduml
 
@@ -33,7 +33,7 @@ class V1TriggerGraph<<TriggerGraph>>{
 
 @startuml(id=TriggerGraphFactory)
 class TriggerGraphFactory{
-+{static}prepareTriggers()
++{static}prepareTriggers(): TriggerGraph
 }
 @enduml
 
@@ -101,18 +101,14 @@ invokeLayer(Point): ZoneLayer
 @enduml
 
 
-@startuml(id=HeadZone)
-class HeadZone<<HeadZone>>{
+@startuml(id=V1TriggerZone)
+class V1TriggerZone<<TriggerZone>>{
 
 }
 @enduml
 
 
-@startuml(id=RimZone)
-class RimZone<<HeadZone>>{
 
-}
-@enduml
 
 
 @startuml(id=ZoneLayer)
@@ -122,18 +118,12 @@ getLayer(Point): ZoneLayer
 @enduml
 
 
-@startuml(id=HeadZoneLayer)
-class HeadZoneLayer<<ZoneLayer>>{
+@startuml(id=V1ZoneLayer)
+class V1ZoneLayer<<ZoneLayer>>{
 
 }
 @enduml
 
-
-@startuml(id=RimZoneLayer)
-class RimZoneLayer<<ZoneLayer>>{
-
-}
-@enduml
 
 
 @startuml(id=PlayerFactory)
@@ -202,19 +192,11 @@ invokeLayer(): Playable
 @enduml
 
 
-@startuml(id=HeadSampleGroup)
-class HeadSampleGroup<<SampleGroup>>{
+@startuml(id=V1SampleGroup)
+class V1SampleGroup<<SampleGroup>>{
 
 }
 @enduml
-
-
-@startuml(id=RimSampleGroup)
-class RimSampleGroup<<SampleGroup>>{
-
-}
-@enduml
-
 
 @startuml(id=SampleLayer)
 interface SampleLayer{
@@ -224,23 +206,17 @@ interface SampleLayer{
 @enduml
 
 
-@startuml(id=HeadSampleLayer)
-class HeadSampleLayer<<SampleLayer>>{
+@startuml(id=V1SampleLayer)
+class V1SampleLayer<<SampleLayer>>{
 samplesThisLayer: Map<SampleID, Playable>
 }
 @enduml
 
-
-@startuml(id=RimSampleLayer)
-class RimSampleLayer<<SampleLayer>>{
-samplesThisLayer: Map<SampleID, Playable>
-}
-@enduml
 
 
 @startuml(id=SampleID)
 interface SampleID{
-
+identify()
 }
 @enduml
 
@@ -257,7 +233,6 @@ roundRobin: Int
 interface Playable{
 -createPlayer()
 +play()
-+getPlayable(): Playable
 +getSampleID(): SampleID
 }
 @enduml

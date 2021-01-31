@@ -6,8 +6,7 @@ ResourceManager->: analyzeFiles()
 ResourceManager<--
 
 return
-Instrument->SampleLibraryFactory++: SampleLibraryFactory()
-SampleLibraryFactory-> SampleLibraryFactory++: prepareSamples()
+Instrument-> SampleLibraryFactory++: prepareSamples()
 SampleLibraryFactory->ResourceManager++: getGroupCount()
 return Int
 
@@ -37,8 +36,7 @@ end loop
 SampleLibraryFactory->SampleLibraryFactory++: addGroup(SampleGroup)
 deactivate
 end loop
-deactivate
-deactivate
-return SampleLibraryFactory
+
+return SampleLibrary
 
 @enduml

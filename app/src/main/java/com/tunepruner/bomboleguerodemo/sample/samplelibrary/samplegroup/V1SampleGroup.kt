@@ -3,7 +3,7 @@ package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SampleLayer
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.Playable
 
-class HeadSampleGroup: SampleGroup {
+class V1SampleGroup: SampleGroup {
     override fun invokeLayer(): Playable {
         TODO("Not yet implemented")
     }

@@ -19,13 +19,13 @@ class PlayableArea(context: Context, var listOfPlayers: List<MediaPlayer>) :
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (event != null) {
-            Log.i("coords", event.y.toString())
-            val velocity: Int = determineVelocity(event)
-            playSample(velocity)
-            Log.i("velocity", velocity.toString())
-            if (event.y > 1000) Log.i("zoneC", "zoneC (${event.y})")
-            else if (event.y > 300 && event.y <= 1000) Log.i("zoneB", "zoneB (${event.y})")
-            else Log.i("zoneA", "zoneA (${event.y})")
+//            Log.i("coords", event.y.toString())
+//            val velocity: Int = determineVelocity(event)
+//            playSample(velocity)
+//            Log.i("velocity", velocity.toString())
+//            if (event.y > 1000) Log.i("zoneC", "zoneC (${event.y})")
+//            else if (event.y > 300 && event.y <= 1000) Log.i("zoneB", "zoneB (${event.y})")
+//            else Log.i("zoneA", "zoneA (${event.y})")
         }
 
         return super.onTouchEvent(event)

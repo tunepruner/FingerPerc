@@ -2,7 +2,7 @@ package com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelay
 
 import android.graphics.Point
 
-class RimZoneLayer: ZoneLayer{
+class V1ZoneLayer: ZoneLayer{
     override fun getLayer(point: Point): ZoneLayer{
         TODO("Not yet implemented")
     }
