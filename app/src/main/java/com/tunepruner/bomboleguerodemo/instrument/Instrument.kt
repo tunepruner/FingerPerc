@@ -15,8 +15,8 @@ class Instrument{
 
     init {
         ResourceManager.prepareSnapshot()
-        val sampleLibrary: SampleLibrary = SampleLibraryFactory.prepareSamples()
         val triggerGraph: TriggerGraph = TriggerGraphFactory.prepareTriggers()
+        val sampleLibrary: SampleLibrary = SampleLibraryFactory.prepareSamples(triggerGraph)
 
         val sampleManager: SampleManager =  SimpleSampleManager(sampleLibrary)
         val triggerManager: TriggerManager = SimpleTriggerManager(triggerGraph)

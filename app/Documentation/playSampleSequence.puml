@@ -11,7 +11,7 @@ Player->SampleManager++: computeSample(ZoneLayer)
 SampleManager->SampleLibrary++: invokeLayer(ZoneLayer)
 SampleLibrary->SampleGroup++: invokeLayer(ZoneLayer)
 SampleGroup->SampleLayer++: invokeSample()
-SampleLayer->LayerLogic++:computeID()
+SampleLayer->LayerLogic++:computeID(SampleLayer)
 LayerLogic->LayerLogic++:addInstance()
 deactivate
 return SampleID

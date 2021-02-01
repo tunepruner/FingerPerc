@@ -18,6 +18,10 @@ class V1TriggerGraph : TriggerGraph {
         return zone.invokeLayer(point)
     }
 
+    override fun getLayer(triggerZone: Int, zoneLayer: Int): ZoneLayer {
+        return zones.get(triggerZone).getLayer(zoneLayer)
+    }
+
     override fun addTriggerZone(triggerZone: TriggerZone) {
         zones.add(triggerZone)
     }

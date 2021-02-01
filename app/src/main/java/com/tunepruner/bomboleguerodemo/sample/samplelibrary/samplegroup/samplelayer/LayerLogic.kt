@@ -10,15 +10,16 @@ class LayerLogic {
         private val history: ConcurrentLinkedQueue<Playable> = ConcurrentLinkedQueue<Playable>()
         private val sampleCoordsMap = HashMap<Int, SampleCoords>()
 
-        fun computeID(incomingLayer: V1SampleLayer): SampleCoords {
-            val lastPlayLayer = history.last().getSampleCoords().getLayerNumber()
+        fun computeID(incomingLayer: SampleLayer): SampleCoords {
+            val lastSampleCoords = history.last().getSampleCoords()
 
-
-            if (incomingLayer.getLayerNumber() != lastPlayLayer) {
+            if (!history.isEmpty() ||
+                incomingLayer.getLayerNumber() != lastSampleCoords.getLayerNumber()
+            )
                 return sampleCoordsMap[1]!!
-            }
 
-            val totalRR = history.last().getSampleCoords().getRoundRobinCount()
+
+            val totalRR = lastSampleCoords.getRoundRobinCount()
             val newRR: Int = (Math.random() * ((totalRR - 1) + 1) + 1).toInt()
             return sampleCoordsMap[newRR]!!
 

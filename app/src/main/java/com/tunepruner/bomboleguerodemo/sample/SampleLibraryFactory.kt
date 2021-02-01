@@ -12,10 +12,11 @@ import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplela
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.BasicCoords
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.SampleCoords
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.V1Sample
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.TriggerGraph
 
 class SampleLibraryFactory {
     companion object {
-        fun prepareSamples(): SampleLibrary {
+        fun prepareSamples(triggerGraph: TriggerGraph): SampleLibrary {
             val sampleLibrary: SampleLibrary = V1SampleLibrary()
             val groupCount = ResourceManager.getGroupCount()
             for (groupIteration in 0..groupCount) {
@@ -36,7 +37,7 @@ class SampleLibraryFactory {
                         thisSampleLayer.addSample(sampleCoords, thisRoundRobin)
                         LayerLogic.addSampleCoords(roundRobinIteration, sampleCoords)
                     }
-                    thisSampleGroup.addLayer(thisSampleLayer)
+                    thisSampleGroup.addLayer(triggerGraph.getLayer(groupIteration, layerIteration), thisSampleLayer)
                 }
                 sampleLibrary.addSampleGroup(thisSampleGroup)
             }

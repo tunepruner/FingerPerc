@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         val principalView = PlayableArea(this, players)
         setContentView(principalView)
     }
+}
 
 
 

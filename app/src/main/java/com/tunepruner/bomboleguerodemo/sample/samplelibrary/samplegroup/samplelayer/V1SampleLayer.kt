@@ -14,7 +14,7 @@ class V1SampleLayer (private val layerNumber: Int) : SampleLayer {
     override fun addSample(sampleCoords: SampleCoords, playable: Playable) {
         samplesThisLayer[sampleCoords] = playable
     }
-    fun getLayerNumber(): Int{
+    override fun getLayerNumber(): Int{
         return layerNumber
     }
 }
