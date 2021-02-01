@@ -3,10 +3,10 @@ package com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelay
 import android.graphics.Point
 
 class V1ZoneLayer(val zoneCount: Int, val zoneIteration: Int, val layerIteration: Int, val layerCountOfZone: Int): ZoneLayer{
-    lateinit var leftLimit: Int
-    lateinit var rightLimit: Int
-    lateinit var topLimit: Int
-    lateinit var bottomLimit: Int
+    var leftLimit: Int = 0
+    var rightLimit: Int = 0
+    var topLimit: Int = 0
+    var bottomLimit: Int = 0
 
     init {
         calculateLimits(zoneCount, zoneIteration, layerIteration, layerCountOfZone)

@@ -5,14 +5,14 @@ import org.mockito.Mockito.verify
 
 internal class V1SampleTest {
     lateinit var mockedV1Sample: V1Sample
-    lateinit var mockedSampleID: SampleID
-    var realSampleID: SampleID = SampleCoords(1, 1)
-    var realV1Sample: V1Sample = V1Sample(realSampleID)
-    var realSimpleSampleWithMockSampleID = V1Sample(mockedSampleID)
+    lateinit var mockedSampleCoords: SampleCoords
+    var realSampleCoords: SampleCoords = BasicCoords(1, 1, layerCount, roundRobinCount)
+    var realV1Sample: V1Sample = V1Sample(realSampleCoords)
+    var realSimpleSampleWithMockSampleID = V1Sample(mockedSampleCoords)
 
     @org.junit.jupiter.api.BeforeEach
     fun setUp() {
-        mockedSampleID = Mockito.mock(SampleID::class.java)
+        mockedSampleCoords = Mockito.mock(SampleCoords::class.java)
         mockedV1Sample = Mockito.mock(V1Sample::class.java)
     }
 

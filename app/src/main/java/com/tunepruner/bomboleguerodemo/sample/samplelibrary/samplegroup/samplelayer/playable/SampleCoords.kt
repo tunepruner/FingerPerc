@@ -1,10 +1,9 @@
 package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable
 
-class SampleCoords(
-    private val layer: Int,
-    private val roundRobin: Int
-) : SampleID {
-    override fun identify() {
-        TODO("Not yet implemented")
-    }
+interface SampleCoords {
+    fun getLayerNumber(): Int
+    fun getRoundRobinNumber(): Int
+    fun isSame(sampleCoords: SampleCoords): Boolean
+    fun getRoundRobinCount(): Int
+    fun getLayerCount(): Int
 }

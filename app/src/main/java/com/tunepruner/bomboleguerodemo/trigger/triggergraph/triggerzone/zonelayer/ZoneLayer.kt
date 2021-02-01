@@ -4,4 +4,5 @@ import android.graphics.Point
 
 interface ZoneLayer{
     fun isMatch(point: Point): Boolean
+    fun getZoneIteration(): Int
 }

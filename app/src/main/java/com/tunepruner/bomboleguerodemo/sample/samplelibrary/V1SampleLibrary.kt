@@ -5,15 +5,14 @@ import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplela
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
 import java.util.*
 
-class V1SampleLibrary: SampleLibrary {
+class V1SampleLibrary : SampleLibrary {
     val groups: LinkedList<SampleGroup> = LinkedList()
-    fun computeSample(zoneLayer: ZoneLayer): Playable {
 
+    override fun computeSample(zoneLayer: ZoneLayer): Playable {
+        val currentGroup = groups[zoneLayer.getZoneIteration()]
+        return currentGroup.invokeLayer(zoneLayer)
     }
-    }
-    override fun invokeLayer(): Playable {
 
-    }
 
     override fun addSampleGroup(sampleGroup: SampleGroup) {
         TODO("Not yet implemented")

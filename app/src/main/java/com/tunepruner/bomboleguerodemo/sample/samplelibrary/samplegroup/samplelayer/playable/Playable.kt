@@ -3,5 +3,7 @@ package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplel
 interface Playable {
     fun createPlayer()
     fun play()
+    fun finish(playable: Playable)
+    fun getSampleCoords(): SampleCoords
 //    fun getSampleID(): SampleID
 }

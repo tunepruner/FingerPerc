@@ -185,7 +185,7 @@ invokeLayer(): Playable
 
 @startuml(id=V1SampleGroup)
 class V1SampleGroup<<SampleGroup>>{
-
+-Map<ZoneLayer, SampleLayer>
 }
 @enduml
 

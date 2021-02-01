@@ -8,7 +8,7 @@ import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelaye
 class SimpleSampleManager(val sampleLibrary: SampleLibrary): SampleManager{
 
     override fun computeSample(zoneLayer: ZoneLayer): Playable {
-        return sampleLibrary.invokeLayer(zoneLayer)
+        return sampleLibrary.computeSample(zoneLayer)
     }
 
     override fun prepareSampleManager() {
