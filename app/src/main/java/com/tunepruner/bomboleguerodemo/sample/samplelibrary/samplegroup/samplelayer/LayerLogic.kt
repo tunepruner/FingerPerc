@@ -21,15 +21,16 @@ class LayerLogic {
             val totalRR = history.last().getSampleCoords().getRoundRobinCount()
             val newRR: Int = (Math.random() * ((totalRR - 1) + 1) + 1).toInt()
             return sampleCoordsMap[newRR]!!
+
         }
 
-        fun addSampleCoords(roundRobin: Int, coords: SampleCoords) {}
+        fun addInstance(playable: Playable) {
+            history.add(playable)
+        }
+
+        fun addSampleCoords(roundRobin: Int, coords: SampleCoords) {
+            sampleCoordsMap[roundRobin] = coords
+        }
     }
 
-    fun addInstance(playable: Playable) {
-        history.add(playable)
-    }
-
-
-}
 }

@@ -7,11 +7,11 @@ class BasicCoords(
     private val roundRobinCount: Int
 ) : SampleCoords {
     override fun getLayerNumber(): Int {
-        TODO("Not yet implemented")
+        return layerNumber
     }
 
     override fun getRoundRobinNumber(): Int {
-        TODO("Not yet implemented")
+        return roundRobinNumber
     }
 
     override fun getLayerCount(): Int{

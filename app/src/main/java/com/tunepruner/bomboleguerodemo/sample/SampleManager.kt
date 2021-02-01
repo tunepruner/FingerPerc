@@ -5,6 +5,4 @@ import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelaye
 
 interface SampleManager {
     fun computeSample(zoneLayer: ZoneLayer): Playable
-
-    fun prepareSampleManager()
 }

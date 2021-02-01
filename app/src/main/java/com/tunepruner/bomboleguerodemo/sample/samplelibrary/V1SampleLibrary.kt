@@ -15,6 +15,6 @@ class V1SampleLibrary : SampleLibrary {
 
 
     override fun addSampleGroup(sampleGroup: SampleGroup) {
-        TODO("Not yet implemented")
+        groups.add(sampleGroup)
     }
 }

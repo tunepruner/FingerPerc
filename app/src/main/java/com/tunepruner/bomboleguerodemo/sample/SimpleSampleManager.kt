@@ -11,9 +11,5 @@ class SimpleSampleManager(val sampleLibrary: SampleLibrary): SampleManager{
         return sampleLibrary.computeSample(zoneLayer)
     }
 
-    override fun prepareSampleManager() {
-        TODO("Not yet implemented")
-    }
-
 
 }

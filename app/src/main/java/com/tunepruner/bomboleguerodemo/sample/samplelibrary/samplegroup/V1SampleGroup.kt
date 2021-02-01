@@ -5,13 +5,13 @@ import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplela
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
 
 class V1SampleGroup: SampleGroup {
-    val layers: Map<ZoneLayer, SampleLayer> = HashMap()
+    private val layers: HashMap<ZoneLayer, SampleLayer> = HashMap()
 
     override fun invokeLayer(zoneLayer: ZoneLayer): Playable {
         return layers[zoneLayer]!!.invokeSample()
     }
 
-    override fun addLayer(sampleLayer: SampleLayer) {
-        TODO("Not yet implemented")
+    override fun addLayer(zoneLayer: ZoneLayer, sampleLayer: SampleLayer) {
+        layers[zoneLayer] = sampleLayer
     }
 }

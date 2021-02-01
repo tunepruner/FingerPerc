@@ -33,7 +33,7 @@ class SampleLibraryFactory {
                             roundRobinIteration
                         )
                         val thisRoundRobin: Playable = V1Sample(sampleCoords, resourcePath)
-                        thisSampleLayer.addSample(thisRoundRobin)
+                        thisSampleLayer.addSample(sampleCoords, thisRoundRobin)
                         LayerLogic.addSampleCoords(roundRobinIteration, sampleCoords)
                     }
                     thisSampleGroup.addLayer(thisSampleLayer)

@@ -22,11 +22,3 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-}
-
-/*TODO
-*  Create Map (velocityLevels) of Lists<Int>(resourceIDs)
-*  Create logic to create each List<Int>(must read filenames)
-*  Create logic
-* */

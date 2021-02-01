@@ -6,5 +6,5 @@ import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelaye
 
 interface SampleGroup {
     fun invokeLayer(zoneLayer: ZoneLayer): Playable
-    fun addLayer(sampleLayer: SampleLayer)
+    fun addLayer(zoneLayer: ZoneLayer, sampleLayer: SampleLayer)
 }
