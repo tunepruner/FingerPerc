@@ -5,12 +5,11 @@
 Instrument->Player++: play(Point)
 Player->TriggerManager++: computeZoneLayer(Point)
 return ZoneLayer
-Player->Player++:startThread()
 
 
 Player->SampleManager++: computeSample(ZoneLayer)
-SampleManager->SampleLibraryFactory++: invokeLayer(ZoneLayer)
-SampleLibraryFactory->SampleGroup++: invokeLayer(ZoneLayer)
+SampleManager->SampleLibrary++: invokeLayer(ZoneLayer)
+SampleLibrary->SampleGroup++: invokeLayer(ZoneLayer)
 SampleGroup->SampleLayer++: invokeSample()
 SampleLayer->LayerLogic++:computeID()
 LayerLogic->LayerLogic++:addInstance()
@@ -26,6 +25,7 @@ return Playable
 return Playable
 return Playable
 
+Player->Player++:startThread()
 
 Player->Playable++: play()
 return

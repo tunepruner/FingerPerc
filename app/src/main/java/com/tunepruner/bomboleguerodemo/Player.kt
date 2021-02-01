@@ -57,10 +57,10 @@ class Player(val context: Context) : AppCompatActivity() {
     fun getResourceID(){}
 
     fun playSample(velocity: Int) = runBlocking {
-//        var mp = MediaPlayer.create(context, /*insert ResouceID here*/)
-//        val thread = async {
-//            mp.start()
-//        }
-//        thread.await()
+        var mp = MediaPlayer.create(context, /*insert ResouceID here*/)
+        val thread = async {
+            mp.start()
+        }
+        thread.await()
     }
 }

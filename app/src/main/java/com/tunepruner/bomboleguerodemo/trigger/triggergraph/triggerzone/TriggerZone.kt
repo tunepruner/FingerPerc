@@ -4,6 +4,6 @@ import android.graphics.Point
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
 
 interface TriggerZone {
-    fun invokeLayer(point: Point): ZoneLayer
+    fun invokeLayer(point: Point): ZoneLayer?
     fun addLayer(triggerLayer: ZoneLayer)
 }

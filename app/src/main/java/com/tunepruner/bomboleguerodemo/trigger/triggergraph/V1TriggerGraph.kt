@@ -1,14 +1,24 @@
 package com.tunepruner.bomboleguerodemo.trigger.triggergraph
 
+import android.graphics.Point
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.TriggerZone
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.V1TriggerZone
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
+import java.util.LinkedList;
 
-class V1TriggerGraph: TriggerGraph {
-    override fun invokeLayer(): ZoneLayer {
-        TODO("Not yet implemented")
+class V1TriggerGraph : TriggerGraph {
+    val zones: LinkedList<TriggerZone> = LinkedList<TriggerZone>()
+
+    override fun invokeLayer(point: Point): ZoneLayer? {
+        var zone: TriggerZone?
+        if (point.y > 900)
+            zone = zones.get(0)
+        else
+            zone = zones.get(1)
+        return zone.invokeLayer(point)
     }
 
     override fun addTriggerZone(triggerZone: TriggerZone) {
-        TODO("Not yet implemented")
+        zones.add(triggerZone)
     }
 }

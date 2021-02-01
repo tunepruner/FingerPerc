@@ -37,13 +37,13 @@ TriggerGraphFactory->TriggerGraphFactory++: addZone(TriggerZone)
 deactivate
 end loop
 deactivate
-return TriggerGraphFactory
+return TriggerGraph
 
 
-Instrument->TriggerManager++: TriggerManager(TriggerGraphFactory)
+Instrument->TriggerManager++: TriggerManager(TriggerGraph)
 return TriggerManager
 
-Instrument->TriggerManager++: SampleManager(SampleLibraryFactory)
+Instrument->TriggerManager++: SampleManager(SampleLibrary)
 return SampleManager
 
 

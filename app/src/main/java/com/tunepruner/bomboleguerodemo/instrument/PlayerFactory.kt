@@ -5,6 +5,8 @@ import com.tunepruner.bomboleguerodemo.trigger.TriggerManager
 
 class PlayerFactory {
     companion object {
-        fun getInstance(triggerManager: TriggerManager, sampleManager: SampleManager){}
+        fun getInstance(triggerManager: TriggerManager, sampleManager: SampleManager):Player{
+            TODO("not impl")
+        }
     }
 }

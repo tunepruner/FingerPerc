@@ -22,6 +22,7 @@ class SampleLibraryFactory{
 @startuml(id=TriggerGraph)
 interface TriggerGraph{
 +invokeLayer(): Playable
++addLayer(TiggerLayer)
 }
 @enduml
 
@@ -44,38 +45,24 @@ class TriggerGraphFactory{
 
 @startuml(id=Instrument)
 class Instrument{
--ResourceManager
 -Player
 init()
 }
 @enduml
 
 
-@startuml(id=ResourceManagerFactory)
-class ResourceManagerFactory{
-{static} getResourceManagerInstance(): ResourceManager
-}
-@enduml
-
-
 @startuml(id=ResourceManager)
-interface ResourceManager{
+class ResourceManager{
 
-+ prepareSnapshot()
-- analyzeFiles()
-+ getGroupCount()
-+ getLayerCount(group: Int)
-+ getRoundRobinCount(group: Int, layer: Int)
-+ getResource(group: Int, layer: Int, roundRobin: Int)
++{static} prepareSnapshot()
+-{static}  analyzeFiles()
++{static} getGroupCount()
++{static} getLayerCount(group: Int)
++{static} getRoundRobinCount(group: Int, layer: Int)
++{static} getResource(group: Int, layer: Int, roundRobin: Int)
 }
 @enduml
 
-@startuml(id=SimpleResourceManager)
-class SimpleResourceManager<<ResourceManager>>{
-directorySnapshot
-init()
-}
-@enduml
 
 
 @startuml(id=TriggerManager)
@@ -113,13 +100,17 @@ class V1TriggerZone<<TriggerZone>>{
 
 @startuml(id=ZoneLayer)
 interface ZoneLayer{
-getLayer(Point): ZoneLayer
+isMatch(Point): boolean
 }
 @enduml
 
 
 @startuml(id=V1ZoneLayer)
 class V1ZoneLayer<<ZoneLayer>>{
+topLimit: Int
+bottomLimit: Int
+rightLimit: Int
+leftLimit: Int
 
 }
 @enduml

@@ -17,12 +17,13 @@ class TriggerGraphFactory {
                 val thisTriggerZone: TriggerZone = V1TriggerZone()
                 val layerCount = ResourceManager.getLayerCount(zoneIteration)
                 for (layerIteration in 0..layerCount) {
-                    val thisLayer: ZoneLayer = V1ZoneLayer()
+                    val thisLayer: ZoneLayer = V1ZoneLayer(zoneCount, zoneIteration, layerIteration, layerCount)
                     thisTriggerZone.addLayer(thisLayer)
                 }
                 triggerGraph.addTriggerZone(thisTriggerZone)
             }
             return triggerGraph
         }
+
     }
 }

@@ -2,7 +2,9 @@ package com.tunepruner.bomboleguerodemo.instrument
 
 class ResourceManager {
     companion object {
-        fun prepareSnapshot(){}
+        fun prepareSnapshot(){
+            analyzeFiles()
+        }
         fun analyzeFiles(){}
         fun getGroupCount(): Int{
             TODO("Not implemented")

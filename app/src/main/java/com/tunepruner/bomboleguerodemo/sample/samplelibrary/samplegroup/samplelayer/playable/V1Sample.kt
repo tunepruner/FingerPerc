@@ -14,7 +14,7 @@ class V1Sample(val sampleID: SampleID, val resourcePath: String) : Playable {
         for (i in 0..30) {
             var mediaPlayer = MediaPlayer()
             mediaPlayer.setDataSource(resourcePath)
-            availPlayers.add()
+            availPlayers.add(mediaPlayer)
         }
     }
 

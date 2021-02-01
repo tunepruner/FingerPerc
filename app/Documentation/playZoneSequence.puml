@@ -3,8 +3,8 @@
 
 Instrument->Player++: play(Point)
 Player->TriggerManager++: computeZoneLayer(Point)
-TriggerManager->TriggerGraphFactory++: invokeLayer(Point)
-TriggerGraphFactory->TriggerZone++: invokeLayer(Point)
+TriggerManager->TriggerGraph++: invokeLayer(Point)
+TriggerGraph->TriggerZone++: invokeLayer(Point)
 TriggerZone->ZoneLayer++: getLayer(Point)
 return ZoneLayer
 return ZoneLayer
