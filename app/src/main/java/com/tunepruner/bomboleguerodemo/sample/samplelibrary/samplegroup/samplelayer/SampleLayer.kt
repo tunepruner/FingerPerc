@@ -5,6 +5,8 @@ import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplela
 
 interface SampleLayer {
     fun invokeSample(): Playable
-    fun addSample(sampleCoords: SampleCoords, playable: Playable)
+    fun addPlayable(sampleCoords: SampleCoords, playable: Playable)
+    fun addSampleCoords(int: Int, sampleCoords: SampleCoords)
     fun getLayerNumber(): Int
+    fun getSampleIDByInt(key: Int): SampleCoords
 }

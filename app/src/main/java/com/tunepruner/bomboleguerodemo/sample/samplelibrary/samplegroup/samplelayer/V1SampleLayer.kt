@@ -2,19 +2,35 @@ package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplel
 
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.Playable
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.SampleCoords
+import java.lang.NullPointerException
 
-class V1SampleLayer (private val layerNumber: Int) : SampleLayer {
-    private val samplesThisLayer: HashMap<SampleCoords, Playable> = HashMap<SampleCoords, Playable>()
+class V1SampleLayer(private val layerNumber: Int, private val layerLogic: LayerLogic) :
+    SampleLayer {
+    private val playablesBySampleCoords: HashMap<SampleCoords, Playable> = HashMap()
+    private val sampleCoordsByInt: HashMap<Int, SampleCoords> = HashMap()
+//    TODO populate this in the factory
+
 
     override fun invokeSample(): Playable {
-        val sampleCoords = LayerLogic.computeID(this)
-        return samplesThisLayer[sampleCoords] ?: error("Sample not found in layer")
+        val sampleCoords = layerLogic.computeID(this)
+        return playablesBySampleCoords[sampleCoords] ?: error("Sample not found in layer")
     }
 
-    override fun addSample(sampleCoords: SampleCoords, playable: Playable) {
-        samplesThisLayer[sampleCoords] = playable
+    override fun addPlayable(sampleCoords: SampleCoords, playable: Playable) {
+        playablesBySampleCoords[sampleCoords] = playable
     }
-    override fun getLayerNumber(): Int{
+
+    override fun addSampleCoords(int: Int, sampleCoords: SampleCoords) {
+        sampleCoordsByInt[int] = sampleCoords
+    }
+
+    override fun getLayerNumber(): Int {
         return layerNumber
+    }
+
+    override fun getSampleIDByInt(key: Int): SampleCoords {
+        return sampleCoordsByInt[key] ?:
+        return sampleCoordsByInt[1] ?:
+        error("SampleCoords not found")
     }
 }

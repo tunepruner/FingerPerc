@@ -14,8 +14,8 @@ SampleGroup->SampleLayer++: invokeSample()
 SampleLayer->LayerLogic++:computeID(SampleLayer)
 LayerLogic->LayerLogic++:addInstance()
 deactivate
-return SampleID
-SampleLayer->Playable++:getPlayable(SampleID)
+return SampleCoords
+SampleLayer->Playable++:getPlayable(SampleCoords)
 Playable->Playable:moveToBusy()
 
 

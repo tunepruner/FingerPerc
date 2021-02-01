@@ -1,8 +1,7 @@
 package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable
 
 import android.media.MediaPlayer
-import android.provider.MediaStore
-import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.LayerLogic
+import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SimpleLayerLogic
 import java.util.concurrent.ConcurrentLinkedQueue
 
 class V1Sample(private val sampleCoords: SampleCoords, private val resourcePath: String) :
@@ -39,7 +38,7 @@ class V1Sample(private val sampleCoords: SampleCoords, private val resourcePath:
     }
 
     override fun finish(playable: Playable) {
-        LayerLogic.addInstance(playable)
+        SimpleLayerLogic.addToHistory(playable)
     }
 
     override fun getSampleCoords(): SampleCoords {
