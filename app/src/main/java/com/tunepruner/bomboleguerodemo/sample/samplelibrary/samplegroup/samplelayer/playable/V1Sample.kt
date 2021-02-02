@@ -1,13 +1,15 @@
 package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable
 
 import android.media.MediaPlayer
+import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.LayerLogic
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SimpleLayerLogic
 import java.util.concurrent.ConcurrentLinkedQueue
 
-class V1Sample(private val sampleCoords: SampleCoords, private val resourcePath: String) :
+class V1Sample(private val sampleCoords: SampleCoords, private val resourcePath: String, private val layerLogic: LayerLogic) :
     Playable {
     val availPlayers = ConcurrentLinkedQueue<MediaPlayer>()
     val busyPlayers = ConcurrentLinkedQueue<MediaPlayer>()
+
     //Or <Exoplayer> later?
 
     init {
@@ -37,9 +39,6 @@ class V1Sample(private val sampleCoords: SampleCoords, private val resourcePath:
         }
     }
 
-    override fun finish(playable: Playable) {
-        SimpleLayerLogic.addToHistory(playable)
-    }
 
     override fun getSampleCoords(): SampleCoords {
         return sampleCoords

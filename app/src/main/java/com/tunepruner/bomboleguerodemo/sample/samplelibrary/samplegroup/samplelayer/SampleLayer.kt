@@ -9,4 +9,5 @@ interface SampleLayer {
     fun addSampleCoords(int: Int, sampleCoords: SampleCoords)
     fun getLayerNumber(): Int
     fun getSampleIDByInt(key: Int): SampleCoords
+    fun getPlayableBySampleCoords(key: SampleCoords): Playable
 }

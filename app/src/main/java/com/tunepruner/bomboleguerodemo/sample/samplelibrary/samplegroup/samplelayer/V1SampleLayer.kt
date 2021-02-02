@@ -8,8 +8,6 @@ class V1SampleLayer(private val layerNumber: Int, private val layerLogic: LayerL
     SampleLayer {
     private val playablesBySampleCoords: HashMap<SampleCoords, Playable> = HashMap()
     private val sampleCoordsByInt: HashMap<Int, SampleCoords> = HashMap()
-//    TODO populate this in the factory
-
 
     override fun invokeSample(): Playable {
         val sampleCoords = layerLogic.computeID(this)
@@ -32,5 +30,11 @@ class V1SampleLayer(private val layerNumber: Int, private val layerLogic: LayerL
         return sampleCoordsByInt[key] ?:
         return sampleCoordsByInt[1] ?:
         error("SampleCoords not found")
+    }
+
+    override fun getPlayableBySampleCoords(key: SampleCoords): Playable {
+        return playablesBySampleCoords[key] ?:
+        return playablesBySampleCoords[1] ?:
+        error("playablesBySampleCoords not found")
     }
 }

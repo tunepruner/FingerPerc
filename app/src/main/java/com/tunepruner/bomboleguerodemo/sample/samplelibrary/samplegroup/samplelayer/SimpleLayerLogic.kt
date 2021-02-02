@@ -17,7 +17,9 @@ class SimpleLayerLogic : LayerLogic {
         }
         val totalRR = incomingLayer.getSampleIDByInt(1).getRoundRobinCount()
         val newRR: Int = (Math.random() * ((totalRR - 1) + 1) + 1).toInt()
-        return incomingLayer.getSampleIDByInt(newRR)
+        var outgoingSampleID = incomingLayer.getSampleIDByInt(newRR)
+        history.add(incomingLayer.getPlayableBySampleCoords(outgoingSampleID))
+        return outgoingSampleID
     }
 
     override fun addToHistory(playable: Playable) {
