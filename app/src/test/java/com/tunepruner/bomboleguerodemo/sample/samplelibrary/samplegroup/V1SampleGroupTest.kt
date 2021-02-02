@@ -1,5 +1,6 @@
 package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup
 
+import com.tunepruner.bomboleguerodemo.instrument.ScreenDimensions
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.LayerLogic
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SampleLayer
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SimpleLayerLogic
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Assertions.*
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class V1SampleGroupTest {
+    lateinit var screenDimensions: ScreenDimensions
     lateinit var currentGroup: SampleGroup
     lateinit var layerLogic: LayerLogic
     lateinit var layerToAdd: SampleLayer
@@ -25,6 +27,7 @@ internal class V1SampleGroupTest {
     @BeforeAll
     fun setUp() {
         currentGroup = V1SampleGroup()
+        screenDimensions = ScreenDimensions(100, 500)
         zoneLayer = V1ZoneLayer(2, 1, 1, 6, screenDimensions)
         layerLogic = SimpleLayerLogic()
         layerToAdd = V1SampleLayer(1, layerLogic)

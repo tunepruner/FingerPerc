@@ -15,6 +15,6 @@ val activity: Activity = Activity()/*right now, field "windowManager" is null, s
 
     @Test
     fun getHeightReturnsPositiveInt(){
-        assert(ScreenPrep.getHeight(activity) > 0)
+        assertNotNull(ScreenPrep.getDimensions(activity))
     }
 }

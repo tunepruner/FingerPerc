@@ -1,5 +1,6 @@
 package com.tunepruner.bomboleguerodemo.sample.samplelibrary
 
+import com.tunepruner.bomboleguerodemo.instrument.ScreenDimensions
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.SampleGroup
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.V1SampleGroup
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.LayerLogic
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.BeforeAll
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class V1SampleLibraryTest {
+    lateinit var screenDimensions: ScreenDimensions
     lateinit var sampleLibrary: SampleLibrary
     lateinit var groupToAdd: SampleGroup
     lateinit var zoneLayerToQuery: ZoneLayer
@@ -30,6 +32,7 @@ internal class V1SampleLibraryTest {
     fun setUp() {
         sampleLibrary = V1SampleLibrary()
         groupToAdd = V1SampleGroup()
+        screenDimensions = ScreenDimensions(1000, 500)
         zoneLayerToQuery = V1ZoneLayer(2, 1, 1, 6, screenDimensions)
         layerLogic = SimpleLayerLogic()
         layerToAdd = V1SampleLayer(1, layerLogic)
