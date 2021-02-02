@@ -1,5 +1,6 @@
 package com.tunepruner.bomboleguerodemo.instrument
 
+import android.app.Activity
 import android.graphics.Point
 import com.tunepruner.bomboleguerodemo.sample.SampleLibraryFactory
 import com.tunepruner.bomboleguerodemo.sample.SampleManager
@@ -10,12 +11,16 @@ import com.tunepruner.bomboleguerodemo.trigger.TriggerGraphFactory
 import com.tunepruner.bomboleguerodemo.trigger.TriggerManager
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.TriggerGraph
 
-class Instrument{
+class Instrument(val activity: Activity){
     lateinit var player: Player
 
     init {
         ResourceManager.prepareSnapshot()
-        val triggerGraph: TriggerGraph = TriggerGraphFactory.prepareTriggers()
+
+        val triggerGraph: TriggerGraph =
+            TriggerGraphFactory
+                .prepareTriggers(
+                    ScreenPrep.getDimensions(activity))
         val sampleLibrary: SampleLibrary = SampleLibraryFactory.prepareSamples(triggerGraph)
 
         val sampleManager: SampleManager =  SimpleSampleManager(sampleLibrary)

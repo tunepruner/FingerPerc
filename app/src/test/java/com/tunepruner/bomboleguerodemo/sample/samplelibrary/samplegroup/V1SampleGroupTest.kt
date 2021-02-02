@@ -25,7 +25,7 @@ internal class V1SampleGroupTest {
     @BeforeAll
     fun setUp() {
         currentGroup = V1SampleGroup()
-        zoneLayer = V1ZoneLayer(2, 1, 1, 6)
+        zoneLayer = V1ZoneLayer(2, 1, 1, 6, screenDimensions)
         layerLogic = SimpleLayerLogic()
         layerToAdd = V1SampleLayer(1, layerLogic)
         basicCoords = BasicCoords(1, 1, 1, 4, 4)

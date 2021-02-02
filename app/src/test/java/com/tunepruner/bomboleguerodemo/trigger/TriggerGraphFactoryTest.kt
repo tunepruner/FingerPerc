@@ -17,7 +17,7 @@ internal class TriggerGraphFactoryTest {
 
     @Test
     fun prepareTriggers() {
-        val triggerGraph = TriggerGraphFactory.prepareTriggers()
+//        val triggerGraph = TriggerGraphFactory.prepareTriggers()
 
     }
 //TODO Use existing sequence diagrams to determine test cases.

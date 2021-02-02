@@ -1,10 +1,11 @@
 package com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone
 
 import android.graphics.Point
+import com.tunepruner.bomboleguerodemo.instrument.ScreenDimensions
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
 import java.util.*
 
-class V1TriggerZone: TriggerZone {
+class V1TriggerZone(screenDimensions: ScreenDimensions): TriggerZone {
     val zoneLayers: LinkedList<ZoneLayer> = LinkedList<ZoneLayer>()
 
     override fun invokeLayer(point: Point): ZoneLayer? {

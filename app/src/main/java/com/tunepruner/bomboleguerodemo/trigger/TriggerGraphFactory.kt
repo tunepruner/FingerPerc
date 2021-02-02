@@ -1,6 +1,7 @@
 package com.tunepruner.bomboleguerodemo.trigger
 
 import com.tunepruner.bomboleguerodemo.instrument.ResourceManager
+import com.tunepruner.bomboleguerodemo.instrument.ScreenDimensions
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.TriggerGraph
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.V1TriggerGraph
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.TriggerZone
@@ -10,14 +11,14 @@ import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelaye
 
 class TriggerGraphFactory {
     companion object {
-        fun prepareTriggers(): TriggerGraph {
+        fun prepareTriggers(screenDimensions: ScreenDimensions): TriggerGraph {
             val triggerGraph: TriggerGraph = V1TriggerGraph()
             val zoneCount = ResourceManager.getGroupCount()
             for (zoneIteration in 0..zoneCount) {
-                val thisTriggerZone: TriggerZone = V1TriggerZone()
+                val thisTriggerZone: TriggerZone = V1TriggerZone(screenDimensions)
                 val layerCount = ResourceManager.getLayerCount(zoneIteration)
                 for (layerIteration in 0..layerCount) {
-                    val thisLayer: ZoneLayer = V1ZoneLayer(zoneCount, zoneIteration, layerIteration, layerCount)
+                    val thisLayer: ZoneLayer = V1ZoneLayer(zoneCount, zoneIteration, layerIteration, layerCount, screenDimensions)
                     thisTriggerZone.addLayer(thisLayer)
                 }
                 triggerGraph.addTriggerZone(thisTriggerZone)

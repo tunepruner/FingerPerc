@@ -30,7 +30,7 @@ internal class V1SampleLibraryTest {
     fun setUp() {
         sampleLibrary = V1SampleLibrary()
         groupToAdd = V1SampleGroup()
-        zoneLayerToQuery = V1ZoneLayer(2, 1, 1, 6)
+        zoneLayerToQuery = V1ZoneLayer(2, 1, 1, 6, screenDimensions)
         layerLogic = SimpleLayerLogic()
         layerToAdd = V1SampleLayer(1, layerLogic)
         basicCoords = BasicCoords(1, 1, 1, 4, 4)
