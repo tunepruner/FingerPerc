@@ -29,9 +29,6 @@ Player->Player++:startThread()
 
 Player->Playable++: play()
 return
-Player->Playable++: finish()
-Playable->Playable: moveToAvail()
-return done
 deactivate
 return done
 @enduml

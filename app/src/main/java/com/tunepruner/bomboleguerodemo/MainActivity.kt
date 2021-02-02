@@ -1,7 +1,11 @@
 package com.tunepruner.bomboleguerodemo
 
+import android.graphics.Insets
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.WindowInsets
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -14,12 +18,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-        val principalView = PlayableArea(this, players)
-        setContentView(principalView)
+        val emptyView = PlayableArea(this, players)
+        setContentView(emptyView)
     }
 }
-
 
 
 

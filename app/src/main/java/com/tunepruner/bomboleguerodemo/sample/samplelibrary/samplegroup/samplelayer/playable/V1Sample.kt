@@ -30,9 +30,14 @@ class V1Sample(private val sampleCoords: SampleCoords, private val resourcePath:
 
     override fun play() {
         if(availPlayers.size>0){
-            busyPlayers.add(availPlayers.last())
-            availPlayers.remove()
-            busyPlayers.last().start()
+            var player = availPlayers.last()
+            availPlayers.remove(player)
+            busyPlayers.add(player)
+            player.start()
+            player.setOnCompletionListener {
+                busyPlayers.remove(it)
+                availPlayers.add(it)
+            }
         }else{
             preparePlayers()
             play()

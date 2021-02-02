@@ -37,13 +37,13 @@ class SampleLibraryFactory {
                             layerCount,
                             roundRobinCount
                         )
-                        val resourcePath = ResourceManager.getResource(
+                        val resourcePath = ResourceManager.getResourcePath(
                             groupIteration,
                             layerIteration,
                             roundRobinIteration
                         )
                         val thisRoundRobin: Playable =
-                            V1Sample(sampleCoords, resourcePath, layerLogic)
+                            V1Sample(sampleCoords, resourcePath!!, layerLogic)
                         thisSampleLayer.addPlayable(sampleCoords, thisRoundRobin)
                         thisSampleLayer.addSampleCoords(roundRobinIteration, sampleCoords)
                     }

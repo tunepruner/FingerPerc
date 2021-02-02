@@ -16,15 +16,14 @@ return new
 SampleLibraryFactory->ResourceManager++: getLayerCount(group: Int)
 return Int
 loop forEachLayerInGroup
-SampleLibraryFactory->SampleLayer++: SampleLayer()
+SampleLibraryFactory->SampleLayer++: SampleLayer(layerNumber, LayerLogic)
 return new
 SampleLibraryFactory->ResourceManager++: getRoundRobinCount(group: Int, layer: Int)
 return Int
 loop forEachSampleInLayer
-SampleLibraryFactory->Playable++: Playable()
+SampleLibraryFactory->Playable++: Playable(SampleCoords, path: String, LayerLogic)
 Playable->Playable++: init()
-Playable->ResourceManager++: getResource()
-return
+
 deactivate
 return new
 SampleLibraryFactory->SampleLayer++: addSample(Playable)

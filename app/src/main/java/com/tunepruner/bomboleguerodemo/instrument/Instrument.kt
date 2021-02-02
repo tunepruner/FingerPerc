@@ -11,8 +11,8 @@ import com.tunepruner.bomboleguerodemo.trigger.TriggerGraphFactory
 import com.tunepruner.bomboleguerodemo.trigger.TriggerManager
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.TriggerGraph
 
-class Instrument(val activity: Activity){
-    lateinit var player: Player
+class Instrument(private val activity: Activity){
+    private var player: Player
 
     init {
         ResourceManager.prepareSnapshot()
