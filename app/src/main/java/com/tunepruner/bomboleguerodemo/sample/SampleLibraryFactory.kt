@@ -31,6 +31,7 @@ class SampleLibraryFactory {
                         ResourceManager.getRoundRobinCount(groupIteration, layerIteration)
                     for (roundRobinIteration in 0..roundRobinCount) {
                         val sampleCoords: SampleCoords = BasicCoords(
+                            groupIteration,
                             layerIteration,
                             roundRobinIteration,
                             layerCount,

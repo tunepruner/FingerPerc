@@ -27,8 +27,8 @@ class V1ZoneLayer(
         zoneIteration: Int,
         layerIteration: Int,
         layerCountOfZone: Int
-    ): Int {
-        TODO("Uncomment and finish implementing")
+    ){
+//        TODO("Uncomment and finish implementing")
         /* Deriving top limit of this TriggerZone from (height of a zone) * (number of preceding ones) */
 //        val screenHeight: Int = /*TODO get Android screen height*/
 //        val thisZoneHeight = screenHeight / zoneCount

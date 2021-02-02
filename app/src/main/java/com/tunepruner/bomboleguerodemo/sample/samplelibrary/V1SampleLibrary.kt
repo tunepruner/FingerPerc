@@ -9,7 +9,7 @@ class V1SampleLibrary : SampleLibrary {
     val groups: LinkedList<SampleGroup> = LinkedList()
 
     override fun computeSample(zoneLayer: ZoneLayer): Playable {
-        val currentGroup = groups[zoneLayer.getZoneIteration()]
+        val currentGroup = groups[zoneLayer.getZoneIteration()-1]
         return currentGroup.invokeLayer(zoneLayer)
     }
 

@@ -1,11 +1,16 @@
 package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable
 
 class BasicCoords(
+    private val groupNumber: Int,
     private val layerNumber: Int,
     private val roundRobinNumber: Int,
     private val layerCount: Int,
     private val roundRobinCount: Int
 ) : SampleCoords {
+    override fun getGroupNumber(): Int {
+        return groupNumber
+    }
+
     override fun getLayerNumber(): Int {
         return layerNumber
     }
