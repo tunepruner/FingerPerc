@@ -6,8 +6,6 @@ import org.junit.jupiter.api.BeforeEach
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
-import org.mockito.Mockito.verify
 
 internal class TriggerGraphFactoryTest {
     lateinit var triggerGraph: TriggerGraph
@@ -20,7 +18,7 @@ internal class TriggerGraphFactoryTest {
 
     @Test
     fun prepareTriggers() {
-        triggerGraph = TriggerGraphFactory.prepareTriggers(screenDimensions)
+        triggerGraph = TriggerGraphFactory.prepareTriggers(screenDimensions, resourceManager)
         assertNotNull(triggerGraph.getLayer(1, 1))
     }
 

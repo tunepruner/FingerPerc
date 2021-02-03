@@ -2,6 +2,7 @@ package com.tunepruner.bomboleguerodemo.instrument
 
 import android.app.Activity
 import android.graphics.Point
+import android.view.MotionEvent
 import com.tunepruner.bomboleguerodemo.sample.SampleLibraryFactory
 import com.tunepruner.bomboleguerodemo.sample.SampleManager
 import com.tunepruner.bomboleguerodemo.sample.SimpleSampleManager
@@ -13,23 +14,23 @@ import com.tunepruner.bomboleguerodemo.trigger.triggergraph.TriggerGraph
 
 class Instrument(private val activity: Activity){
     private var player: Player
+    private var resourceManager: ResourceManager = ResourceManager(activity)
 
     init {
-        ResourceManager.prepareSnapshot()
-
+        val touchLogic: TouchLogic = SimpleTouchLogic()
         val triggerGraph: TriggerGraph =
             TriggerGraphFactory
                 .prepareTriggers(
-                    ScreenPrep.getDimensions(activity))
-        val sampleLibrary: SampleLibrary = SampleLibraryFactory.prepareSamples(triggerGraph)
+                    ScreenPrep.getDimensions(activity), resourceManager)
+        val sampleLibrary: SampleLibrary = SampleLibraryFactory.prepareSamples(triggerGraph, resourceManager)
 
-        val sampleManager: SampleManager =  SimpleSampleManager(sampleLibrary)
         val triggerManager: TriggerManager = SimpleTriggerManager(triggerGraph)
+        val sampleManager: SampleManager =  SimpleSampleManager(sampleLibrary)
 
-        player = PlayerFactory.getInstance(triggerManager, sampleManager)
+        player = PlayerFactory.getInstance(touchLogic, triggerManager, sampleManager)
     }
 
-    fun onTouch(point: Point){
-        player.play(point)
+    fun onTouch(event: MotionEvent){
+        player.play(event.x, event.y)
     }
 }

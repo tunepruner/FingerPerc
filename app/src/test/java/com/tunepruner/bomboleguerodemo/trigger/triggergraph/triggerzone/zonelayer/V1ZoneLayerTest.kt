@@ -1,5 +1,6 @@
 package com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer
 
+import android.graphics.Point
 import com.tunepruner.bomboleguerodemo.instrument.ScreenDimensions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
@@ -18,14 +19,16 @@ internal class V1ZoneLayerTest {
     @Test
     fun calculateLimits() {
         var zoneLayer = V1ZoneLayer(2, 1, 1, 6, screenDimensions)
-        assert(zoneLayer.getBottomLimit() > 0)
-        assert(zoneLayer.getTopLimit() == 0)
-        assert(zoneLayer.getLeftLimit() == 0)
-        assert(zoneLayer.getRightLimit() == 500)
+
     }
 
     @Test
     fun isMatch() {
+        var point = Point()
+        point.x = 100
+        point.y = 166
+        var zoneLayer = V1ZoneLayer(2, 1, 2, 6, ScreenDimensions(1000, 500))
+        assertTrue(zoneLayer.isMatch(point))
     }
 
     @Test

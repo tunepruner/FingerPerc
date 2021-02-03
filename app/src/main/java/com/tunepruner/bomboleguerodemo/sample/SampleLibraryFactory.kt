@@ -17,19 +17,19 @@ import com.tunepruner.bomboleguerodemo.trigger.triggergraph.TriggerGraph
 
 class SampleLibraryFactory {
     companion object {
-        fun prepareSamples(triggerGraph: TriggerGraph): SampleLibrary {
+        fun prepareSamples(triggerGraph: TriggerGraph, resourceManager: ResourceManager): SampleLibrary {
             val sampleLibrary: SampleLibrary = V1SampleLibrary()
-            val groupCount = ResourceManager.getGroupCount()
-            for (groupIteration in 0..groupCount) {
+            val groupCount = resourceManager.getGroupCount()
+            for (groupIteration in 1..groupCount) {
                 val thisSampleGroup: SampleGroup = V1SampleGroup()
-                val layerCount = ResourceManager.getLayerCount(groupIteration)
-                for (layerIteration in 0..layerCount) {
+                val layerCount = resourceManager.getLayerCount(groupIteration)
+                for (layerIteration in 1..layerCount) {
                     val layerLogic: LayerLogic = SimpleLayerLogic()
                     val thisSampleLayer: SampleLayer =
                         V1SampleLayer(layerIteration, layerLogic)
                     val roundRobinCount =
-                        ResourceManager.getRoundRobinCount(groupIteration, layerIteration)
-                    for (roundRobinIteration in 0..roundRobinCount) {
+                        resourceManager.getRoundRobinCount(groupIteration, layerIteration)
+                    for (roundRobinIteration in 1..roundRobinCount) {
                         val sampleCoords: SampleCoords = BasicCoords(
                             groupIteration,
                             layerIteration,
@@ -37,13 +37,13 @@ class SampleLibraryFactory {
                             layerCount,
                             roundRobinCount
                         )
-                        val resourcePath = ResourceManager.getResourcePath(
+                        val assetFileDescriptor = resourceManager.getAssetFileDescriptor(
                             groupIteration,
                             layerIteration,
                             roundRobinIteration
                         )
                         val thisRoundRobin: Playable =
-                            V1Sample(sampleCoords, resourcePath!!, layerLogic)
+                            V1Sample(sampleCoords, assetFileDescriptor!!, layerLogic)
                         thisSampleLayer.addPlayable(sampleCoords, thisRoundRobin)
                         thisSampleLayer.addSampleCoords(roundRobinIteration, sampleCoords)
                     }

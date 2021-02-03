@@ -8,7 +8,7 @@ class V1SampleGroup: SampleGroup {
     private val layers: HashMap<ZoneLayer, SampleLayer> = HashMap()
 
     override fun invokeLayer(zoneLayer: ZoneLayer): Playable {
-        return layers[zoneLayer]!!.invokeSample()
+        return layers[zoneLayer]?.invokeSample() ?: error("Sample group looked for a match layer in it's list, but couldn't find one.")
     }
 
     override fun addLayer(zoneLayer: ZoneLayer, sampleLayer: SampleLayer) {

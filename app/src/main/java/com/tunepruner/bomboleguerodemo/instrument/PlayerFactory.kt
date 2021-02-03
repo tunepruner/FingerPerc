@@ -5,8 +5,8 @@ import com.tunepruner.bomboleguerodemo.trigger.TriggerManager
 
 class PlayerFactory {
     companion object {
-        fun getInstance(triggerManager: TriggerManager, sampleManager: SampleManager):Player{
-            return SimplePlayer(triggerManager, sampleManager)
+        fun getInstance(touchLogic: TouchLogic, triggerManager: TriggerManager, sampleManager: SampleManager):Player{
+            return SimplePlayer(touchLogic, triggerManager, sampleManager)
         }
     }
 }

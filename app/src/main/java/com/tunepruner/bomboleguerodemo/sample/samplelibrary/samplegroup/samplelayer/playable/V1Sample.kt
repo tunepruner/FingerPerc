@@ -1,11 +1,16 @@
 package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable
 
+import android.content.res.AssetFileDescriptor
 import android.media.MediaPlayer
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.LayerLogic
-import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SimpleLayerLogic
 import java.util.concurrent.ConcurrentLinkedQueue
 
-class V1Sample(private val sampleCoords: SampleCoords, private val resourcePath: String, private val layerLogic: LayerLogic) :
+
+class V1Sample(
+    private val sampleCoords: SampleCoords,
+    private val assetFileDescriptor: AssetFileDescriptor,
+    private val layerLogic: LayerLogic
+) :
     Playable {
     val availPlayers = ConcurrentLinkedQueue<MediaPlayer>()
     val busyPlayers = ConcurrentLinkedQueue<MediaPlayer>()
@@ -13,33 +18,34 @@ class V1Sample(private val sampleCoords: SampleCoords, private val resourcePath:
     //Or <Exoplayer> later?
 
     init {
-        for (i in 0..30) {
-            var mediaPlayer = MediaPlayer()
-            mediaPlayer.setDataSource(resourcePath)
-            preparePlayers()
-        }
+            while (availPlayers.size < 3) {
+                createAnotherPlayer()
+            }
     }
 
-    fun preparePlayers() {
-        while (availPlayers.size < 20) {
-            var player = MediaPlayer()
-            player.setDataSource(resourcePath)
-            availPlayers.add(player)
-        }
+    private fun createAnotherPlayer(){
+        var mediaPlayer = MediaPlayer()
+        mediaPlayer.setDataSource(assetFileDescriptor.fileDescriptor, assetFileDescriptor.startOffset, assetFileDescriptor.length);
+        availPlayers.add(mediaPlayer)
+        mediaPlayer.prepare()
     }
+
+
+
 
     override fun play() {
         if(availPlayers.size>0){
             var player = availPlayers.last()
             availPlayers.remove(player)
             busyPlayers.add(player)
-            player.start()
+
             player.setOnCompletionListener {
                 busyPlayers.remove(it)
                 availPlayers.add(it)
             }
+            player.start()
         }else{
-            preparePlayers()
+            createAnotherPlayer()
             play()
         }
     }

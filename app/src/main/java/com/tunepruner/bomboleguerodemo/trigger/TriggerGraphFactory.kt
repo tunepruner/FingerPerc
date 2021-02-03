@@ -11,13 +11,13 @@ import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelaye
 
 class TriggerGraphFactory {
     companion object {
-        fun prepareTriggers(screenDimensions: ScreenDimensions): TriggerGraph {
+        fun prepareTriggers(screenDimensions: ScreenDimensions, resourceManager: ResourceManager): TriggerGraph {
             val triggerGraph: TriggerGraph = V1TriggerGraph()
-            val zoneCount = ResourceManager.getGroupCount()
-            for (zoneIteration in 0..zoneCount) {
-                val thisTriggerZone: TriggerZone = V1TriggerZone(screenDimensions)
-                val layerCount = ResourceManager.getLayerCount(zoneIteration)
-                for (layerIteration in 0..layerCount) {
+            val zoneCount = resourceManager.getGroupCount()
+            for (zoneIteration in 1..zoneCount) {
+                val thisTriggerZone: TriggerZone = V1TriggerZone(2, 1, screenDimensions)
+                val layerCount = resourceManager.getLayerCount(zoneIteration)
+                for (layerIteration in 1..layerCount) {
                     val thisLayer: ZoneLayer = V1ZoneLayer(zoneCount, zoneIteration, layerIteration, layerCount, screenDimensions)
                     thisTriggerZone.addLayer(thisLayer)
                 }

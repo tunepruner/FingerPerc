@@ -4,16 +4,16 @@ import android.graphics.Point
 import com.tunepruner.bomboleguerodemo.instrument.ScreenDimensions
 
 class V1ZoneLayer(
-    private val zoneCount: Int,
+    val zoneCount: Int,
     private val zoneIteration: Int,
-    private val layerIteration: Int,
-    private val layerCountOfZone: Int,
+    val layerIteration: Int,
+    val layerCountOfZone: Int,
     val screenDimensions: ScreenDimensions
 ) : ZoneLayer {
-    private var leftLimit: Int = 0
-    private var rightLimit: Int = 0
-    private var topLimit: Int = 0
-    private var bottomLimit: Int = 0
+    var leftLimit: Int = 0
+    var rightLimit: Int = 0
+    var topLimit: Int = 0
+    var bottomLimit: Int = 0
 
     init {
         calculateLimits(zoneCount, zoneIteration, layerIteration, layerCountOfZone)
@@ -22,6 +22,10 @@ class V1ZoneLayer(
     override fun isMatch(point: Point): Boolean {
         return point.x in (leftLimit + 1)..rightLimit &&
                 point.y in (topLimit + 1)..bottomLimit
+    }
+
+    override fun getZoneIteration(): Int {
+        return zoneIteration
     }
 
     private fun calculateLimits(
@@ -44,23 +48,5 @@ class V1ZoneLayer(
         rightLimit = screenDimensions.screenWidth
     }
 
-    override fun getZoneIteration(): Int {
-        return zoneIteration
-    }
 
-    override fun getBottomLimit(): Int {
-        return bottomLimit
-    }
-
-    override fun getTopLimit(): Int {
-        return topLimit
-    }
-
-    override fun getLeftLimit(): Int {
-        return leftLimit
-    }
-
-    override fun getRightLimit(): Int {
-        return rightLimit
-    }
 }

@@ -1,77 +1,109 @@
 package com.tunepruner.bomboleguerodemo.instrument
 
-import java.io.File
+import android.content.Context
+import android.content.res.AssetFileDescriptor
+import android.content.res.AssetManager
 
-class ResourceManager {
-    companion object {
-        lateinit var fileSnapshots: ArrayList<FileSnapshot>
+class ResourceManager(val context: Context) {
 
-        fun prepareSnapshot() {
-            analyzeFiles()
+    val fileSnapshots = ArrayList<FileSnapshot>()
+
+    init {
+        analyzeFiles(context)
+    }
+
+    private fun analyzeFiles(context: Context) {
+        val assetManager: AssetManager = context.assets
+        val filePaths = assetManager.list("bomboleguerosamples/")
+            ?: error("AssetManager couldn't get filePaths")
+        for (element in filePaths) {
+            val filename: String = element
+            val afd: AssetFileDescriptor =
+                assetManager.openFd("bomboleguerosamples/1_10_1_bomboleguero.wav")
+            val fileSnapshot = filenameToSnapshot(filename, afd)
+            fileSnapshots.add(fileSnapshot)
         }
+        val testing = "sdfjl"
+    }
 
-        private fun analyzeFiles() {
-            val dirPath = File("./assets/bombolegurosamples")/*TODO figure this out for sure*/
-            val filePaths = dirPath.listFiles()
-            for (i in 0..filePaths.size) {
-                val file: File = filePaths[i]
-                val fileSnapshot = filenameToSnapshot(file.name, file.absolutePath)
-                fileSnapshots.add(fileSnapshot)
-            }
+
+    private fun filenameToSnapshot(fileName: String, assetFileDescriptor: AssetFileDescriptor): FileSnapshot {
+        /* Example: "2_6_3_bomboleguero.wav"
+        [group number]_[layer number]_[round robin number]_[library name]*/
+
+        val fileNameMembers = fileName.split("_")
+        val lastMemberWithoutExtension = fileNameMembers[3].split(".")
+
+        return FileSnapshot(
+            fileName,
+            fileNameMembers[0].toInt(),
+            fileNameMembers[1].toInt() - 9,
+            fileNameMembers[2].toInt(),
+            lastMemberWithoutExtension[0],
+            assetFileDescriptor
+        )
+
+    }
+
+    fun getGroupCount(): Int {
+        var groupCounter = 0
+        for (element in fileSnapshots) {
+            if (element.group > groupCounter)
+                groupCounter = element.group
         }
+        return groupCounter
+    }
 
+    fun getLayerCount(group: Int): Int {
+        var fileSnapshotsThisGroup = ArrayList<FileSnapshot>()
+        for (element in fileSnapshots) {
+            if (element.group == group)
+                fileSnapshotsThisGroup.add(element)
 
-        private fun filenameToSnapshot(fileName: String, path: String): FileSnapshot {
-            /* Example: "2_6_3_bomboleguero.wav"
-            [group number]_[layer number]_[round robin number]_[library name]*/
-
-            val fileNameMembers = fileName.split("_")
-            return FileSnapshot(
-                fileName,
-                fileNameMembers[0].toInt(),
-                fileNameMembers[1].toInt(),
-                fileNameMembers[2].toInt(),
-                fileNameMembers[3],
-                path
-            )
         }
-
-        fun getGroupCount(): Int {
-            var groupCounter = 0
-            for (fileSnapshot: FileSnapshot in fileSnapshots) {
-                if (fileSnapshot.group > groupCounter)
-                    groupCounter = fileSnapshot.group
-            }
-            return groupCounter
+        var layerCounter = 0
+        for (element in fileSnapshotsThisGroup) {
+            if (element.layer > layerCounter)
+                layerCounter = element.layer
         }
+        return layerCounter
+    }
 
-        fun getLayerCount(group: Int): Int {
-            var layerCounter = 0
-            for (fileSnapshot: FileSnapshot in fileSnapshots) {
-                if (fileSnapshot.group == group)
-                    layerCounter++
-            }
-            return layerCounter
+    fun getRoundRobinCount(group: Int, layer: Int): Int {
+        var fileSnapshotsThisGroupAndLayer = ArrayList<FileSnapshot>()
+        for (element in fileSnapshots) {
+            if (element.group == group && element.layer == layer)
+                fileSnapshotsThisGroupAndLayer.add(element)
         }
+        var getRoundRobinCounter = 0
+        for (element in fileSnapshotsThisGroupAndLayer) {
+            if (element.roundRobin > getRoundRobinCounter)
+                getRoundRobinCounter = element.roundRobin
+        }
+        return getRoundRobinCounter
+    }
 
-        fun getRoundRobinCount(group: Int, layer: Int): Int {
-            var roundRobinCounter = 0
-            for (fileSnapshot: FileSnapshot in fileSnapshots) {
-                if (fileSnapshot.group == group && fileSnapshot.layer == layer)
-                    roundRobinCounter++
-            }
-            return roundRobinCounter
+    fun getAssetFileDescriptor(
+        group: Int,
+        layer: Int,
+        roundRobin: Int
+    ): AssetFileDescriptor? {//TODO this returns null for now, because of the way the asset manager works...
+//        return fileSnapshots
+//            .find {
+//                equals(
+//                    FileSnapshot("", group, layer, roundRobin, "bomboleguero", "asdf")
+//                )
+//            }
+//            ?.path
+        for (element in fileSnapshots) {
+            if (element.group == group &&
+                element.layer == layer &&
+                element.roundRobin == roundRobin &&
+                element.libraryName.equals("bomboleguero")
+            )//compiler told me this is fine, but I'm not sure...not .equals? or .contains?
+                return element.assetFileDescriptor
         }
-
-        fun getResourcePath(group: Int, layer: Int, roundRobin: Int): String? {
-            return fileSnapshots
-                .find {
-                    equals(
-                        FileSnapshot("", group, layer, roundRobin, "bomboleguro", "")
-                    )
-                }
-                ?.path
-        }
+        return null
     }
 }
 
@@ -81,12 +113,12 @@ data class FileSnapshot(
     val layer: Int,
     val roundRobin: Int,
     val libraryName: String,
-    val path: String
+    val assetFileDescriptor: AssetFileDescriptor
 ) {
     fun equals(toFind: FileSnapshot): Boolean {
         return toFind.group == group &&
                 toFind.layer == layer &&
                 toFind.roundRobin == roundRobin &&
-                toFind.libraryName == libraryName//compiler told me this is fine, but I'm not sure...not .equals? or .contains?
+                toFind.libraryName.contains(libraryName)//compiler told me this is fine, but I'm not sure...not .equals? or .contains?
     }
 }

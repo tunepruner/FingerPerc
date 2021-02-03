@@ -2,6 +2,7 @@ package com.tunepruner.bomboleguerodemo
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Point
 import android.media.MediaPlayer
 import android.util.Log
 import android.view.MotionEvent
@@ -13,23 +14,35 @@ import kotlinx.coroutines.runBlocking
 //import com.google.android.exoplayer2.ExoPlayer
 //import com.google.android.exoplayer2.SimpleExoPlayer
 
-class PlayableArea(activity: Activity, var listOfPlayers: List<MediaPlayer>) :
+class PlayableArea(activity: Activity) :
     LinearLayout(activity) {
+    lateinit var instrument: Instrument
 
-
-
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event != null) {
-            Log.i("coords", event.y.toString())
-
-        }
-
-        return super.onTouchEvent(event)
+    init {
+        instrument = instrumentFactory(activity)
     }
 
+
+//    fun onTouchEvent(x: Float, y: Float) {
+//        Log.i("testtt", "x = $x; y = $y")
+//    }
+
+    override fun performClick(): Boolean {
+        return super.performClick()
+
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        var point = Point()
+        point.x = event.x.toInt()
+        point.y = event.y.toInt()
+        instrument.onTouch(event)
+//        Log.i("testtt", "x: ${event.x}, y: ${event.y}")
+        return true
+    }
+//
 }
 
 fun instrumentFactory(activity: Activity): Instrument {
-
     return Instrument(activity)
 }

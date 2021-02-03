@@ -1,6 +1,7 @@
 package com.tunepruner.bomboleguerodemo.trigger.triggergraph
 
 import android.graphics.Point
+import android.util.Log
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.TriggerZone
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.V1TriggerZone
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
@@ -9,17 +10,20 @@ import java.util.LinkedList;
 class V1TriggerGraph : TriggerGraph {
     val zones: LinkedList<TriggerZone> = LinkedList<TriggerZone>()
 
-    override fun invokeLayer(point: Point): ZoneLayer? {
-        var zone: TriggerZone?
-        if (point.y > 900)
-            zone = zones.get(0)
-        else
-            zone = zones.get(1)
-        return zone.invokeLayer(point)
+    override fun invokeLayer(point: Point): ZoneLayer {
+
+        var triggerZone: TriggerZone? = null
+        for (triggerZoneToCheck: TriggerZone in zones) {
+            if (triggerZoneToCheck.isMatch(point)) {
+                triggerZone = triggerZoneToCheck
+            }
+        }
+        triggerZone?: error("TriggerManager called triggerGraph.invokeLayer(point) but got back a null value")
+        return triggerZone.invokeLayer(point)?: error("TriggerGraph called triggerZone.invokeLayer(point) but got back a null value")
     }
 
     override fun getLayer(triggerZone: Int, zoneLayer: Int): ZoneLayer {
-        return zones.get(triggerZone).getLayer(zoneLayer)
+        return zones[triggerZone-1].getLayer(zoneLayer)
     }
 
     override fun addTriggerZone(triggerZone: TriggerZone) {
