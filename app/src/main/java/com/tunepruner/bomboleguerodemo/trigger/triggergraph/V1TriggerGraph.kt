@@ -13,9 +13,9 @@ class V1TriggerGraph : TriggerGraph {
     override fun invokeLayer(point: Point): ZoneLayer {
 
         var triggerZone: TriggerZone? = null
-        for (triggerZoneToCheck: TriggerZone in zones) {
-            if (triggerZoneToCheck.isMatch(point)) {
-                triggerZone = triggerZoneToCheck
+        for (element in zones) {
+            if (element.isMatch(point)) {
+                triggerZone = element
             }
         }
         triggerZone?: error("TriggerManager called triggerGraph.invokeLayer(point) but got back a null value")

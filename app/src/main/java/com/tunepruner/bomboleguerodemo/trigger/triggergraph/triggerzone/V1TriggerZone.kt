@@ -37,9 +37,9 @@ class V1TriggerZone(
 
     override fun invokeLayer(point: Point): ZoneLayer {
         var zoneLayer: ZoneLayer? = null
-        for (zoneLayerToCheck: ZoneLayer in zoneLayers) {
-            if (zoneLayerToCheck.isMatch(point)) {
-                zoneLayer = zoneLayerToCheck
+        for (element in zoneLayers) {
+            if (element.isMatch(point)) {
+                zoneLayer = element
             }
         }
         return zoneLayer

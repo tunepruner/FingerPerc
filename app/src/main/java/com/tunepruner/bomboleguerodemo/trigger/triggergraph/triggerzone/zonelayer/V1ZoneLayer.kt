@@ -40,7 +40,7 @@ class V1ZoneLayer(
 
         /* Deriving top limit of this ZoneLayer from (height of a layer) * (number of preceding ones) */
         val thisLayerHeight = thisZoneHeight / layerCountOfZone
-        topLimit = thisLayerHeight * (layerIteration - 1)
+        topLimit = zoneTopLimit + thisLayerHeight * (layerIteration - 1)
 
         bottomLimit = topLimit + thisLayerHeight
 

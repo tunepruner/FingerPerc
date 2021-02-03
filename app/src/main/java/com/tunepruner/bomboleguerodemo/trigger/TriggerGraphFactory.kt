@@ -15,7 +15,7 @@ class TriggerGraphFactory {
             val triggerGraph: TriggerGraph = V1TriggerGraph()
             val zoneCount = resourceManager.getGroupCount()
             for (zoneIteration in 1..zoneCount) {
-                val thisTriggerZone: TriggerZone = V1TriggerZone(2, 1, screenDimensions)
+                val thisTriggerZone: TriggerZone = V1TriggerZone(zoneCount, zoneIteration, screenDimensions)
                 val layerCount = resourceManager.getLayerCount(zoneIteration)
                 for (layerIteration in 1..layerCount) {
                     val thisLayer: ZoneLayer = V1ZoneLayer(zoneCount, zoneIteration, layerIteration, layerCount, screenDimensions)
