@@ -33,7 +33,7 @@ class PlayableArea(activity: Activity) :
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        var point = Point()
+        val point = Point()
         point.x = event.x.toInt()
         point.y = event.y.toInt()
         instrument.onTouch(event)

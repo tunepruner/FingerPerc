@@ -87,19 +87,12 @@ class ResourceManager(val context: Context) {
         group: Int,
         layer: Int,
         roundRobin: Int
-    ): AssetFileDescriptor? {//TODO this returns null for now, because of the way the asset manager works...
-//        return fileSnapshots
-//            .find {
-//                equals(
-//                    FileSnapshot("", group, layer, roundRobin, "bomboleguero", "asdf")
-//                )
-//            }
-//            ?.path
+    ): AssetFileDescriptor? {
         for (element in fileSnapshots) {
             if (element.group == group &&
                 element.layer == layer &&
                 element.roundRobin == roundRobin &&
-                element.libraryName.equals("bomboleguero")
+                element.libraryName == "bomboleguero"
             )//compiler told me this is fine, but I'm not sure...not .equals? or .contains?
                 return element.assetFileDescriptor
         }
