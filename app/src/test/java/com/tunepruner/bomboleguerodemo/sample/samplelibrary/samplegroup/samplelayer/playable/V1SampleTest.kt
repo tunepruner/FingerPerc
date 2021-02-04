@@ -1,7 +1,5 @@
 package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable
 
-import org.mockito.Mockito
-import org.mockito.Mockito.verify
 
 internal class V1SampleTest {
 //    lateinit var mockedV1Sample: V1Sample

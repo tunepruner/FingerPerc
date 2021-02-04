@@ -1,10 +1,11 @@
 package com.tunepruner.bomboleguerodemo.instrument
 
 import android.graphics.Point
+import android.graphics.PointF
 import android.view.MotionEvent
 
 interface TouchLogic {
-    fun reduceTouchEvent(x: Float, y: Float): Point?
+    fun reduceTouchEvent(event: MotionEvent): PointF?
 
 
 }

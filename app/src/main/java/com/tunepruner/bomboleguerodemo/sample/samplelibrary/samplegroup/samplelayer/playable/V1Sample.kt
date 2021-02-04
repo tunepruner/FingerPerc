@@ -3,25 +3,25 @@ package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplel
 import android.content.res.AssetFileDescriptor
 import android.media.MediaPlayer
 import android.util.Log
-import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.LayerLogic
+import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.RoundRobinLogic
 import java.util.concurrent.ConcurrentLinkedQueue
 
 
 class V1Sample(
     private val sampleCoords: SampleCoords,
     private val assetFileDescriptor: AssetFileDescriptor,
-    private val layerLogic: LayerLogic
 ) :
     Playable {
-    val availPlayers = ConcurrentLinkedQueue<MediaPlayer>()
-    val busyPlayers = ConcurrentLinkedQueue<MediaPlayer>()
+    private val availPlayers = ConcurrentLinkedQueue<MediaPlayer>()
+    private val busyPlayers = ConcurrentLinkedQueue<MediaPlayer>()
 
     //Or <Exoplayer> later?
 
     init {
-        while (availPlayers.size < 3) {
+        while (availPlayers.size < 1) {
             createAnotherPlayer()
         }
+        Log.i("sizeOfAvail", "${availPlayers.size}")
     }
 
     private fun createAnotherPlayer() {
@@ -31,22 +31,23 @@ class V1Sample(
             assetFileDescriptor.startOffset,
             assetFileDescriptor.length
         );
-        availPlayers.add(mediaPlayer)
         mediaPlayer.prepare()
+        availPlayers.add(mediaPlayer)
+
     }
 
 
     override fun play() {
+        var player = availPlayers.last()
+        player.setOnCompletionListener {
+            busyPlayers.remove(it)
+            availPlayers.add(it)
+        }
+
+
         if (availPlayers.size > 0) {
-            var player = availPlayers.last()
             availPlayers.remove(player)
             busyPlayers.add(player)
-            Log.i("testtt", assetFileDescriptor.fileDescriptor.toString())
-
-            player.setOnCompletionListener {
-                busyPlayers.remove(it)
-                availPlayers.add(it)
-            }
             player.start()
         } else {
             createAnotherPlayer()

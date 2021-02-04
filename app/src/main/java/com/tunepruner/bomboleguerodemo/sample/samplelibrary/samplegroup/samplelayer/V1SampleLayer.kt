@@ -2,15 +2,14 @@ package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplel
 
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.Playable
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.SampleCoords
-import java.lang.NullPointerException
 
-class V1SampleLayer(private val layerNumber: Int, private val layerLogic: LayerLogic) :
+class V1SampleLayer(private val layerNumber: Int, private val roundRobinLogic: RoundRobinLogic) :
     SampleLayer {
     private val playablesBySampleCoords: HashMap<SampleCoords, Playable> = HashMap()
     private val sampleCoordsByInt: HashMap<Int, SampleCoords> = HashMap()
 
     override fun invokeSample(): Playable {
-        val sampleCoords = layerLogic.computeID(this)
+        val sampleCoords = roundRobinLogic.computeID(this)
         return playablesBySampleCoords[sampleCoords] ?: error("Sample not found in layer")
     }
 

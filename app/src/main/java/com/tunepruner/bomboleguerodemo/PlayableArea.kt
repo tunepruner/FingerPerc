@@ -24,7 +24,6 @@ class PlayableArea(activity: Activity) :
 
 
 //    fun onTouchEvent(x: Float, y: Float) {
-//        Log.i("testtt", "x = $x; y = $y")
 //    }
 
     override fun performClick(): Boolean {
@@ -37,7 +36,6 @@ class PlayableArea(activity: Activity) :
         point.x = event.x.toInt()
         point.y = event.y.toInt()
         instrument.onTouch(event)
-//        Log.i("testtt", "x: ${event.x}, y: ${event.y}")
         return true
     }
 //

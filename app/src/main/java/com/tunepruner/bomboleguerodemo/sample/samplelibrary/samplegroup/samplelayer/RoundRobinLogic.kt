@@ -4,7 +4,7 @@ import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplela
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.SampleCoords
 import java.util.concurrent.ConcurrentLinkedQueue
 
-interface LayerLogic{
+interface RoundRobinLogic{
 
     fun computeID(incomingLayer: SampleLayer): SampleCoords
 

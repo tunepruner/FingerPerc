@@ -4,7 +4,7 @@ import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplela
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.SampleCoords
 import java.util.concurrent.ConcurrentLinkedQueue
 
-class SimpleLayerLogic : LayerLogic {
+class SimpleRoundRobinLogic : RoundRobinLogic {
     private var history: ConcurrentLinkedQueue<Playable> = ConcurrentLinkedQueue<Playable>()
 
     override fun computeID(incomingLayer: SampleLayer): SampleCoords {
@@ -14,7 +14,7 @@ class SimpleLayerLogic : LayerLogic {
             ) {
                 return incomingLayer.getSampleIDByInt(1)
             }
-        }
+        }else if (history.size > 3) history.remove()
         val totalRR = incomingLayer.getSampleIDByInt(1).getRoundRobinCount()
         val newRR: Int = (Math.random() * ((totalRR - 1) + 1) + 1).toInt()
         var outgoingSampleID = incomingLayer.getSampleIDByInt(newRR)
@@ -24,6 +24,7 @@ class SimpleLayerLogic : LayerLogic {
 
     override fun addToHistory(playable: Playable) {
         history.add(playable)
+
     }
 }
 

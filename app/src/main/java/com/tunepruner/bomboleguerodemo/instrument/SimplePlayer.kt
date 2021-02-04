@@ -1,8 +1,5 @@
 package com.tunepruner.bomboleguerodemo.instrument
 
-import android.graphics.Point
-import android.media.MediaPlayer
-import android.util.Log
 import android.view.MotionEvent
 import com.tunepruner.bomboleguerodemo.sample.SampleManager
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.Playable
@@ -11,18 +8,15 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
 class SimplePlayer(
-    val touchLogic: TouchLogic,
-    val triggerManager: TriggerManager,
-    val sampleManager: SampleManager
+    private val touchLogic: TouchLogic,
+    private val triggerManager: TriggerManager,
+    private val sampleManager: SampleManager
 ) : Player {
 
-    override fun play(x: Float, y: Float) {
-        val point = touchLogic.reduceTouchEvent(x, y)
-        if (point != null) {
-            val zoneLayer = triggerManager.computeZoneLayer(point)
-            Log.i("testtt", "---------")
-            Log.i("testtt", "${zoneLayer.getZoneIteration()}")
-            Log.i("testtt", "${zoneLayer.getLayerIteration()}")
+    override fun play(event: MotionEvent) {
+        val pointF = touchLogic.reduceTouchEvent(event)
+        if (pointF != null) {
+            val zoneLayer = triggerManager.computeZoneLayer(pointF)
             val playable = sampleManager.computeSample(zoneLayer)
             playOnNewThread(playable)
         }

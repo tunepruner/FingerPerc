@@ -1,13 +1,12 @@
 package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup
 
 import com.tunepruner.bomboleguerodemo.instrument.ScreenDimensions
-import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.LayerLogic
+import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.RoundRobinLogic
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SampleLayer
-import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SimpleLayerLogic
+import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SimpleRoundRobinLogic
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.V1SampleLayer
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.BasicCoords
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.SampleCoords
-import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.V1Sample
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.V1ZoneLayer
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
 import org.junit.jupiter.api.Test
@@ -19,7 +18,7 @@ import org.junit.jupiter.api.Assertions.*
 internal class V1SampleGroupTest {
     lateinit var screenDimensions: ScreenDimensions
     lateinit var currentGroup: SampleGroup
-    lateinit var layerLogic: LayerLogic
+    lateinit var roundRobinLogic: RoundRobinLogic
     lateinit var layerToAdd: SampleLayer
     lateinit var basicCoords: SampleCoords
     lateinit var zoneLayer: ZoneLayer
@@ -29,16 +28,16 @@ internal class V1SampleGroupTest {
         currentGroup = V1SampleGroup()
         screenDimensions = ScreenDimensions(100, 500)
         zoneLayer = V1ZoneLayer(2, 1, 1, 6, screenDimensions)
-        layerLogic = SimpleLayerLogic()
-        layerToAdd = V1SampleLayer(1, layerLogic)
+        roundRobinLogic = SimpleRoundRobinLogic()
+        layerToAdd = V1SampleLayer(1, roundRobinLogic)
         basicCoords = BasicCoords(1, 1, 1, 4, 4)
-        layerToAdd.addPlayable(
-            basicCoords,
-            V1Sample(
-                basicCoords,
-                "sdfjkl", layerLogic
-            )
-        )
+//        layerToAdd.addPlayable(
+//            basicCoords,
+//            V1Sample(
+//                basicCoords,
+//                "sdfjkl", layerLogic
+//            )
+//        )
         layerToAdd.addSampleCoords(1, basicCoords)
         currentGroup.addLayer(zoneLayer, layerToAdd)
     }

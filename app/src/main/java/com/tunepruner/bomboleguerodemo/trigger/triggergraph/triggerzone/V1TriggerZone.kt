@@ -1,6 +1,7 @@
 package com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone
 
 import android.graphics.Point
+import android.graphics.PointF
 import com.tunepruner.bomboleguerodemo.instrument.ScreenDimensions
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
 import java.util.*
@@ -30,15 +31,15 @@ class V1TriggerZone(
         rightLimit = screenDimensions.screenWidth
     }
 
-    override fun isMatch(point: Point): Boolean {
-        return point.x in (leftLimit + 1)..rightLimit &&
-                point.y in (topLimit + 1)..bottomLimit
+    override fun isMatch(pointF: PointF): Boolean {
+        return pointF.x.toInt() in (leftLimit + 1)..rightLimit &&
+                pointF.y.toInt() in (topLimit + 1)..bottomLimit
     }
 
-    override fun invokeLayer(point: Point): ZoneLayer {
+    override fun invokeLayer(pointF: PointF): ZoneLayer {
         var zoneLayer: ZoneLayer? = null
         for (element in zoneLayers) {
-            if (element.isMatch(point)) {
+            if (element.isMatch(pointF)) {
                 zoneLayer = element
             }
         }

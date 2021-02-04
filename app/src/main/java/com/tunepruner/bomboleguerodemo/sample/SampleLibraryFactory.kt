@@ -5,9 +5,9 @@ import com.tunepruner.bomboleguerodemo.sample.samplelibrary.SampleLibrary
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.V1SampleLibrary
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.SampleGroup
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.V1SampleGroup
-import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.LayerLogic
+import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.RoundRobinLogic
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SampleLayer
-import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SimpleLayerLogic
+import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SimpleRoundRobinLogic
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.V1SampleLayer
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.Playable
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.BasicCoords
@@ -24,9 +24,9 @@ class SampleLibraryFactory {
                 val thisSampleGroup: SampleGroup = V1SampleGroup()
                 val layerCount = resourceManager.getLayerCount(groupIteration)
                 for (layerIteration in 1..layerCount) {
-                    val layerLogic: LayerLogic = SimpleLayerLogic()
+                    val roundRobinLogic: RoundRobinLogic = SimpleRoundRobinLogic()
                     val thisSampleLayer: SampleLayer =
-                        V1SampleLayer(layerIteration, layerLogic)
+                        V1SampleLayer(layerIteration, roundRobinLogic)
                     val roundRobinCount =
                         resourceManager.getRoundRobinCount(groupIteration, layerIteration)
                     for (roundRobinIteration in 1..roundRobinCount) {
@@ -43,7 +43,7 @@ class SampleLibraryFactory {
                             roundRobinIteration
                         )
                         val thisRoundRobin: Playable =
-                            V1Sample(sampleCoords, assetFileDescriptor!!, layerLogic)
+                            V1Sample(sampleCoords, assetFileDescriptor!!)
                         thisSampleLayer.addPlayable(sampleCoords, thisRoundRobin)
                         thisSampleLayer.addSampleCoords(roundRobinIteration, sampleCoords)
                     }
