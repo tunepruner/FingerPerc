@@ -6,7 +6,7 @@ import com.tunepruner.bomboleguerodemo.instrument.ScreenDimensions
 class V1ZoneLayer(
     val zoneCount: Int,
     private val zoneIteration: Int,
-    val layerIteration: Int,
+    private val layerIteration: Int,
     val layerCountOfZone: Int,
     val screenDimensions: ScreenDimensions
 ) : ZoneLayer {
@@ -26,6 +26,10 @@ class V1ZoneLayer(
 
     override fun getZoneIteration(): Int {
         return zoneIteration
+    }
+
+    override fun getLayerIteration(): Int {
+        return layerIteration
     }
 
     private fun calculateLimits(

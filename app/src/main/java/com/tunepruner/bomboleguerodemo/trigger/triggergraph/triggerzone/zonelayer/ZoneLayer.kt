@@ -6,4 +6,5 @@ interface ZoneLayer{
     fun isMatch(point: Point): Boolean
     abstract fun getZoneIteration(): Int
 
+    fun getLayerIteration(): Int
 }

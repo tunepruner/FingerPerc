@@ -2,6 +2,7 @@ package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplel
 
 import android.content.res.AssetFileDescriptor
 import android.media.MediaPlayer
+import android.util.Log
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.LayerLogic
 import java.util.concurrent.ConcurrentLinkedQueue
 
@@ -18,33 +19,36 @@ class V1Sample(
     //Or <Exoplayer> later?
 
     init {
-            while (availPlayers.size < 3) {
-                createAnotherPlayer()
-            }
+        while (availPlayers.size < 3) {
+            createAnotherPlayer()
+        }
     }
 
-    private fun createAnotherPlayer(){
+    private fun createAnotherPlayer() {
         var mediaPlayer = MediaPlayer()
-        mediaPlayer.setDataSource(assetFileDescriptor.fileDescriptor, assetFileDescriptor.startOffset, assetFileDescriptor.length);
+        mediaPlayer.setDataSource(
+            assetFileDescriptor.fileDescriptor,
+            assetFileDescriptor.startOffset,
+            assetFileDescriptor.length
+        );
         availPlayers.add(mediaPlayer)
         mediaPlayer.prepare()
     }
 
 
-
-
     override fun play() {
-        if(availPlayers.size>0){
+        if (availPlayers.size > 0) {
             var player = availPlayers.last()
             availPlayers.remove(player)
             busyPlayers.add(player)
+            Log.i("testtt", assetFileDescriptor.fileDescriptor.toString())
 
             player.setOnCompletionListener {
                 busyPlayers.remove(it)
                 availPlayers.add(it)
             }
             player.start()
-        }else{
+        } else {
             createAnotherPlayer()
             play()
         }

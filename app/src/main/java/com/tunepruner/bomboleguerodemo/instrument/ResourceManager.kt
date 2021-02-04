@@ -19,7 +19,8 @@ class ResourceManager(val context: Context) {
         for (element in filePaths) {
             val filename: String = element
             val afd: AssetFileDescriptor =
-                assetManager.openFd("bomboleguerosamples/1_10_1_bomboleguero.wav")
+//                assetManager.openFd("bomboleguerosamples/2_10_1_bomboleguero.wav")
+                assetManager.openFd("bomboleguerosamples/$element")
             val fileSnapshot = filenameToSnapshot(filename, afd)
             fileSnapshots.add(fileSnapshot)
         }

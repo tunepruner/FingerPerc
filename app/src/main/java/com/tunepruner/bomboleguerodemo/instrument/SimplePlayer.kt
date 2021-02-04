@@ -20,6 +20,9 @@ class SimplePlayer(
         val point = touchLogic.reduceTouchEvent(x, y)
         if (point != null) {
             val zoneLayer = triggerManager.computeZoneLayer(point)
+            Log.i("testtt", "---------")
+            Log.i("testtt", "${zoneLayer.getZoneIteration()}")
+            Log.i("testtt", "${zoneLayer.getLayerIteration()}")
             val playable = sampleManager.computeSample(zoneLayer)
             playOnNewThread(playable)
         }
@@ -30,6 +33,5 @@ class SimplePlayer(
             playable.play()
         }
         thread.await()
-        Log.i("testtt", this.toString())
     }
 }

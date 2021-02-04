@@ -26,11 +26,6 @@ class SimpleTouchLogic : TouchLogic {
         return if (isFarAway(x, y)) {
             returns.add(point)
             lastTime = Calendar.getInstance().timeInMillis;
-//            Log.i("testtt", "isFarAway")
-//            Log.i("testtt", "last returned x: ${returns.last().x}")
-//            Log.i("testtt", "last returned y: ${returns.last().y}")
-//            Log.i("testtt", "this x: $x")
-//            Log.i("testtt", "this y: $y")
 
             point
         } else if (!isFarAway(x, y) &&
@@ -46,23 +41,12 @@ class SimpleTouchLogic : TouchLogic {
 
     private fun isFarAway(x: Float, y: Float): Boolean {
         if (returns.isEmpty()) {
-            Log.i("testtt", "Returns is empty")
             return true
         }
-        Log.i("testtt", "------------------")
-        Log.i("testtt", "returns.last x = ${returns.last().x}")
-        Log.i("testtt", "returns.last y = ${returns.last().y}")
-        Log.i("testtt","x = $x")
-        Log.i("testtt","y = $y")
         val side1 = x.toDouble() - returns.last().x
-        Log.i("testtt", "side1 = $side1")
         val side2 = y.toDouble() - returns.last().y
-        Log.i("testtt", "side2 = $side2")
 
         val distance = sqrt(side1.pow(2.0) + side2.pow(2.0))
-        Log.i("testtt", "distance = $distance")
-        Log.i("testtt", "is greater? ${distance > 300}")
-        Log.i("testtt", "------------------")
-        return distance > 300
+        return distance > 500
     }
 }
