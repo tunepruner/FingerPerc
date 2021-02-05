@@ -15,14 +15,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         playableArea = PlayableArea(this)
         setContentView(playableArea)
-
-        playableArea.setOnTouchListener { v, event ->
-            v.performClick()
-            playableArea.onTouchEvent(event)
-            true
-        }
-
-
     }
 }
 
