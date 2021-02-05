@@ -3,6 +3,7 @@ package com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone
 import android.graphics.PointF
 import com.tunepruner.bomboleguerodemo.instrument.ScreenDimensions
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.LayerZone
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLimits
 import java.util.*
 
 class V1TriggerZone(
@@ -11,29 +12,27 @@ class V1TriggerZone(
     val screenDimensions: ScreenDimensions
 ) : TriggerZone {
     private val layerZones: LinkedList<LayerZone> = LinkedList<LayerZone>()
-    var leftLimit: Int = 0
-    var rightLimit: Int = 0
-    var topLimit: Int = 0
-    var bottomLimit: Int = 0
 
+    lateinit var zoneLimits: ZoneLimits
 
     init {
-        calculateLimits(zoneCount, zoneIteration)
+        zoneLimits = calculateLimits(zoneCount, zoneIteration)
     }
 
-    private fun calculateLimits(zoneCount: Int, zoneIteration: Int) {
+    private fun calculateLimits(zoneCount: Int, zoneIteration: Int): ZoneLimits {
         /* Deriving top limit of this TriggerZone from (height of a zone) * (number of preceding ones) */
         val thisZoneHeight = screenDimensions.screenHeight / zoneCount
-        topLimit = thisZoneHeight * (zoneIteration - 1)
-        bottomLimit = topLimit + thisZoneHeight
+        val topLimit = thisZoneHeight * (zoneIteration - 1)
+        val bottomLimit = topLimit + thisZoneHeight
 
-        leftLimit = 0
-        rightLimit = screenDimensions.screenWidth
+        val leftLimit = 0
+        val rightLimit = screenDimensions.screenWidth
+        return ZoneLimits(leftLimit, rightLimit, topLimit, bottomLimit)
     }
 
     override fun isMatch(pointF: PointF): Boolean {
-        return pointF.x.toInt() in (leftLimit + 1)..rightLimit &&
-                pointF.y.toInt() in (topLimit + 1)..bottomLimit
+        return pointF.x.toInt() in (zoneLimits.leftLimit + 1)..zoneLimits.rightLimit &&
+                pointF.y.toInt() in (zoneLimits.topLimit + 1)..zoneLimits.bottomLimit
     }
 
     override fun invokeLayer(pointF: PointF): LayerZone {
