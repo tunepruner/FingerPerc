@@ -16,8 +16,8 @@ import com.tunepruner.bomboleguerodemo.trigger.SimpleTriggerManager
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.TriggerGraph
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.V1TriggerGraph
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.V1TriggerZone
-import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.V1ZoneLayer
-import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.V1LayerZone
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.LayerZone
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.BeforeAll
@@ -32,13 +32,13 @@ internal class SimplePlayerTest {
     lateinit var triggerZone1ToAdd: V1TriggerZone
     lateinit var triggerZone2ToAdd: V1TriggerZone
     lateinit var point: Point
-    lateinit var layerToAdd: V1ZoneLayer
+    lateinit var layerToAdd: V1LayerZone
     lateinit var screenDimensions: ScreenDimensions
 
     lateinit var sampleManager: SimpleSampleManager
     lateinit var sampleLibrary: SampleLibrary
     lateinit var sampleGroupToAdd: SampleGroup
-    lateinit var zoneLayerToQuery: ZoneLayer
+    lateinit var layerZoneToQuery: LayerZone
     lateinit var sampleLayerToAdd: SampleLayer
     lateinit var basicCoords: SampleCoords
     lateinit var roundRobinLogic: RoundRobinLogic
@@ -52,7 +52,7 @@ internal class SimplePlayerTest {
         triggerZone2ToAdd = V1TriggerZone(2, 2, screenDimensions)
         triggerGraph.addTriggerZone(triggerZone1ToAdd)
         triggerGraph.addTriggerZone(triggerZone2ToAdd)
-        layerToAdd = V1ZoneLayer(2, 1, 1, 2, screenDimensions)
+        layerToAdd = V1LayerZone(2, 1, 1, 2, screenDimensions)
         triggerZone1ToAdd.addLayer(layerToAdd)
         triggerZone2ToAdd.addLayer(layerToAdd)
         point = Point()
@@ -62,7 +62,7 @@ internal class SimplePlayerTest {
         sampleLibrary = V1SampleLibrary()
         sampleGroupToAdd = V1SampleGroup()
         screenDimensions = ScreenDimensions(1000, 500)
-        zoneLayerToQuery = V1ZoneLayer(2, 1, 1, 6, screenDimensions)
+        layerZoneToQuery = V1LayerZone(2, 1, 1, 6, screenDimensions)
         roundRobinLogic = SimpleRoundRobinLogic()
         sampleLayerToAdd = V1SampleLayer(1, roundRobinLogic)
         basicCoords = BasicCoords(1, 1, 1, 4, 4)
@@ -74,7 +74,7 @@ internal class SimplePlayerTest {
 //            )
 //        )
         sampleLayerToAdd.addSampleCoords(1, basicCoords)
-        sampleGroupToAdd.addLayer(zoneLayerToQuery, sampleLayerToAdd)
+        sampleGroupToAdd.addLayer(layerZoneToQuery, sampleLayerToAdd)
         sampleLibrary.addSampleGroup(sampleGroupToAdd)
         sampleManager = SimpleSampleManager(sampleLibrary)
 //        player = SimplePlayer(triggerManager, sampleManager)

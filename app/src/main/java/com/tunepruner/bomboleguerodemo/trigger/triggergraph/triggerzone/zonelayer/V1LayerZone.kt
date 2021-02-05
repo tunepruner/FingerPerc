@@ -1,28 +1,24 @@
 package com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer
 
-import android.graphics.Point
 import android.graphics.PointF
 import com.tunepruner.bomboleguerodemo.instrument.ScreenDimensions
 
-class V1ZoneLayer(
-    val zoneCount: Int,
+class V1LayerZone(
+    private val zoneCount: Int,
     private val zoneIteration: Int,
     private val layerIteration: Int,
-    val layerCountOfZone: Int,
+    private val layerCountOfZone: Int,
     val screenDimensions: ScreenDimensions
-) : ZoneLayer {
-    var leftLimit: Int = 0
-    var rightLimit: Int = 0
-    var topLimit: Int = 0
-    var bottomLimit: Int = 0
+) : LayerZone {
+    lateinit var zoneLimits: ZoneLimits
 
     init {
-        calculateLimits(zoneCount, zoneIteration, layerIteration, layerCountOfZone)
+        zoneLimits = calculateLimits()
     }
 
     override fun isMatch(pointF: PointF): Boolean {
-        return pointF.x.toInt() in (leftLimit + 1)..rightLimit &&
-                pointF.y.toInt() in (topLimit + 1)..bottomLimit
+        return pointF.x.toInt() in (zoneLimits.leftLimit + 1)..zoneLimits.rightLimit &&
+                pointF.y.toInt() in (zoneLimits.topLimit + 1)..zoneLimits.bottomLimit
     }
 
     override fun getZoneIteration(): Int {
@@ -33,25 +29,22 @@ class V1ZoneLayer(
         return layerIteration
     }
 
-    private fun calculateLimits(
-        zoneCount: Int,
-        zoneIteration: Int,
-        layerIteration: Int,
-        layerCountOfZone: Int
-    ){
+    private fun calculateLimits(): ZoneLimits{
         /* Deriving top limit of this TriggerZone from (height of a zone) * (number of preceding ones) */
         val thisZoneHeight = screenDimensions.screenHeight / zoneCount
         val zoneTopLimit = thisZoneHeight * (zoneIteration - 1)
 
         /* Deriving top limit of this ZoneLayer from (height of a layer) * (number of preceding ones) */
         val thisLayerHeight = thisZoneHeight / layerCountOfZone
-        topLimit = zoneTopLimit + thisLayerHeight * (layerIteration - 1)
+        val topLimit = zoneTopLimit + thisLayerHeight * (layerIteration - 1)
 
-        bottomLimit = topLimit + thisLayerHeight
+        val bottomLimit = topLimit + thisLayerHeight
 
-        leftLimit = 0
-        rightLimit = screenDimensions.screenWidth
+        val leftLimit = 0
+        val rightLimit = screenDimensions.screenWidth
+        return ZoneLimits(leftLimit, rightLimit, topLimit, bottomLimit)
+
     }
-
-
 }
+
+data class ZoneLimits(val leftLimit: Int, val rightLimit: Int, val topLimit: Int, val bottomLimit: Int)

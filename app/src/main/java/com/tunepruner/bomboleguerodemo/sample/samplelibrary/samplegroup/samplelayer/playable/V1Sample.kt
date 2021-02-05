@@ -39,7 +39,7 @@ object MediaHandler {
         )
         .build()
     val soundPool = SoundPool.Builder()
-        .setMaxStreams(10)
+        .setMaxStreams(20)
         .setAudioAttributes(
             audioAttributes
         )

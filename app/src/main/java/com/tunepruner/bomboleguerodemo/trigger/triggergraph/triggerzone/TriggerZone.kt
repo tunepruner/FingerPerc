@@ -1,12 +1,11 @@
 package com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone
 
-import android.graphics.Point
 import android.graphics.PointF
-import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.LayerZone
 
 interface TriggerZone {
     fun isMatch(pointF: PointF): Boolean
-    fun invokeLayer(pointF: PointF): ZoneLayer?
-    fun addLayer(triggerLayer: ZoneLayer)
-    fun getLayer(zoneLayer: Int): ZoneLayer
+    fun invokeLayer(pointF: PointF): LayerZone?
+    fun addLayer(triggerLayerZone: LayerZone)
+    fun getLayer(zoneLayer: Int): LayerZone
 }

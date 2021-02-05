@@ -3,7 +3,7 @@ package com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelay
 import android.graphics.Point
 import android.graphics.PointF
 
-interface ZoneLayer{
+interface LayerZone{
     fun isMatch(pointF: PointF): Boolean
     abstract fun getZoneIteration(): Int
 

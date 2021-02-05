@@ -5,7 +5,7 @@ import com.tunepruner.bomboleguerodemo.instrument.ScreenDimensions
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.TriggerGraph
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.V1TriggerGraph
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.V1TriggerZone
-import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.V1ZoneLayer
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.V1LayerZone
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -20,7 +20,7 @@ internal class SimpleTriggerManagerTest {
     lateinit var triggerZone1ToAdd: V1TriggerZone
     lateinit var triggerZone2ToAdd: V1TriggerZone
     lateinit var point: Point
-    lateinit var layerToAdd: V1ZoneLayer
+    lateinit var layerToAdd: V1LayerZone
     lateinit var screenDimensions: ScreenDimensions
     @BeforeEach
     fun setUp() {
@@ -31,7 +31,7 @@ internal class SimpleTriggerManagerTest {
         triggerZone2ToAdd = V1TriggerZone(2, 2, screenDimensions)
         triggerGraph.addTriggerZone(triggerZone1ToAdd)
         triggerGraph.addTriggerZone(triggerZone2ToAdd)
-        layerToAdd = V1ZoneLayer(2, 1, 1, 2, screenDimensions)
+        layerToAdd = V1LayerZone(2, 1, 1, 2, screenDimensions)
         triggerZone1ToAdd.addLayer(layerToAdd)
         triggerZone2ToAdd.addLayer(layerToAdd)
         point = Point()

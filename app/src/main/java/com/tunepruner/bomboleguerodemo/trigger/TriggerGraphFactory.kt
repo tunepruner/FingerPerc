@@ -6,8 +6,8 @@ import com.tunepruner.bomboleguerodemo.trigger.triggergraph.TriggerGraph
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.V1TriggerGraph
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.TriggerZone
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.V1TriggerZone
-import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.V1ZoneLayer
-import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.V1LayerZone
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.LayerZone
 
 class TriggerGraphFactory {
     companion object {
@@ -18,8 +18,8 @@ class TriggerGraphFactory {
                 val thisTriggerZone: TriggerZone = V1TriggerZone(zoneCount, zoneIteration, screenDimensions)
                 val layerCount = resourceManager.getLayerCount(zoneIteration)
                 for (layerIteration in 1..layerCount) {
-                    val thisLayer: ZoneLayer = V1ZoneLayer(zoneCount, zoneIteration, layerIteration, layerCount, screenDimensions)
-                    thisTriggerZone.addLayer(thisLayer)
+                    val thisLayerZone: LayerZone = V1LayerZone(zoneCount, zoneIteration, layerIteration, layerCount, screenDimensions)
+                    thisTriggerZone.addLayer(thisLayerZone)
                 }
                 triggerGraph.addTriggerZone(thisTriggerZone)
             }

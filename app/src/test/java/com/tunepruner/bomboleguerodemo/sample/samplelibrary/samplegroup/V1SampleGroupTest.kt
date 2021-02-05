@@ -7,8 +7,8 @@ import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplela
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.V1SampleLayer
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.BasicCoords
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.SampleCoords
-import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.V1ZoneLayer
-import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.V1LayerZone
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.LayerZone
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance
@@ -21,13 +21,13 @@ internal class V1SampleGroupTest {
     lateinit var roundRobinLogic: RoundRobinLogic
     lateinit var layerToAdd: SampleLayer
     lateinit var basicCoords: SampleCoords
-    lateinit var zoneLayer: ZoneLayer
+    lateinit var layerZone: LayerZone
 
     @BeforeAll
     fun setUp() {
         currentGroup = V1SampleGroup()
         screenDimensions = ScreenDimensions(100, 500)
-        zoneLayer = V1ZoneLayer(2, 1, 1, 6, screenDimensions)
+        layerZone = V1LayerZone(2, 1, 1, 6, screenDimensions)
         roundRobinLogic = SimpleRoundRobinLogic()
         layerToAdd = V1SampleLayer(1, roundRobinLogic)
         basicCoords = BasicCoords(1, 1, 1, 4, 4)
@@ -39,12 +39,12 @@ internal class V1SampleGroupTest {
 //            )
 //        )
         layerToAdd.addSampleCoords(1, basicCoords)
-        currentGroup.addLayer(zoneLayer, layerToAdd)
+        currentGroup.addLayer(layerZone, layerToAdd)
     }
 
     @Test
     fun invokeLayer() {
-        assertNotNull(currentGroup.invokeLayer(zoneLayer))
+        assertNotNull(currentGroup.invokeLayer(layerZone))
         //Currently fails because of comment in V1ZoneLayer
     }
 

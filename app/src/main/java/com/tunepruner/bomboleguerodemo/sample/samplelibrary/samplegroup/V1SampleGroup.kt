@@ -2,16 +2,16 @@ package com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup
 
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.SampleLayer
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.Playable
-import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.LayerZone
 
 class V1SampleGroup: SampleGroup {
-    private val layers: HashMap<ZoneLayer, SampleLayer> = HashMap()
+    private val layers: HashMap<LayerZone, SampleLayer> = HashMap()
 
-    override fun invokeLayer(zoneLayer: ZoneLayer): Playable {
-        return layers[zoneLayer]?.invokeSample() ?: error("Sample group looked for a match layer in it's list, but couldn't find one.")
+    override fun invokeLayer(layerZone: LayerZone): Playable {
+        return layers[layerZone]?.invokeSample() ?: error("Sample group looked for a match layer in it's list, but couldn't find one.")
     }
 
-    override fun addLayer(zoneLayer: ZoneLayer, sampleLayer: SampleLayer) {
-        layers[zoneLayer] = sampleLayer
+    override fun addLayer(layerZone: LayerZone, sampleLayer: SampleLayer) {
+        layers[layerZone] = sampleLayer
     }
 }

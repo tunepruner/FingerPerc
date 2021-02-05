@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Assertions.*
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class V1ZoneLayerTest {
+internal class V1LayerZoneTest {
     lateinit var screenDimensions: ScreenDimensions
 
     @BeforeAll
@@ -18,7 +18,7 @@ internal class V1ZoneLayerTest {
 
     @Test
     fun calculateLimits() {
-        var zoneLayer = V1ZoneLayer(2, 1, 1, 6, screenDimensions)
+        var zoneLayer = V1LayerZone(2, 1, 1, 6, screenDimensions)
 
     }
 
@@ -27,7 +27,7 @@ internal class V1ZoneLayerTest {
         var point = Point()
         point.x = 100
         point.y = 166
-        var zoneLayer = V1ZoneLayer(2, 1, 2, 6, ScreenDimensions(1000, 500))
+        var zoneLayer = V1LayerZone(2, 1, 2, 6, ScreenDimensions(1000, 500))
         assertTrue(zoneLayer.isMatch(point))
     }
 

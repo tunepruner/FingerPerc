@@ -9,8 +9,8 @@ import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplela
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.V1SampleLayer
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.BasicCoords
 import com.tunepruner.bomboleguerodemo.sample.samplelibrary.samplegroup.samplelayer.playable.SampleCoords
-import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.V1ZoneLayer
-import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLayer
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.V1LayerZone
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.LayerZone
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 
@@ -23,7 +23,7 @@ internal class V1SampleLibraryTest {
     lateinit var screenDimensions: ScreenDimensions
     lateinit var sampleLibrary: SampleLibrary
     lateinit var groupToAdd: SampleGroup
-    lateinit var zoneLayerToQuery: ZoneLayer
+    lateinit var layerZoneToQuery: LayerZone
     lateinit var layerToAdd: SampleLayer
     lateinit var basicCoords: SampleCoords
     lateinit var roundRobinLogic: RoundRobinLogic
@@ -32,7 +32,7 @@ internal class V1SampleLibraryTest {
         sampleLibrary = V1SampleLibrary()
         groupToAdd = V1SampleGroup()
         screenDimensions = ScreenDimensions(1000, 500)
-        zoneLayerToQuery = V1ZoneLayer(2, 1, 1, 6, screenDimensions)
+        layerZoneToQuery = V1LayerZone(2, 1, 1, 6, screenDimensions)
         roundRobinLogic = SimpleRoundRobinLogic()
         layerToAdd = V1SampleLayer(1, roundRobinLogic)
         basicCoords = BasicCoords(1, 1, 1, 4, 4)
@@ -44,13 +44,13 @@ internal class V1SampleLibraryTest {
 //            )
 //        )
         layerToAdd.addSampleCoords(1, basicCoords)
-        groupToAdd.addLayer(zoneLayerToQuery, layerToAdd)
+        groupToAdd.addLayer(layerZoneToQuery, layerToAdd)
         sampleLibrary.addSampleGroup(groupToAdd)
     }
 
     @Test
     fun computeSampleReturnsNotNull() {
-        assertNotNull(sampleLibrary.computeSample(zoneLayerToQuery))
+        assertNotNull(sampleLibrary.computeSample(layerZoneToQuery))
     }
 
     @Test
