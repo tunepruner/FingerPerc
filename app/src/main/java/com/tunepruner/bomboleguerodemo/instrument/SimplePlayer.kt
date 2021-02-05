@@ -18,14 +18,8 @@ class SimplePlayer(
         if (pointF != null) {
             val zoneLayer = triggerManager.computeZoneLayer(pointF)
             val playable = sampleManager.computeSample(zoneLayer)
-            playOnNewThread(playable)
-        }
-    }
-
-    private fun playOnNewThread(playable: Playable) = runBlocking {
-        val thread = async {
             playable.play()
         }
-        thread.await()
     }
 }
+
