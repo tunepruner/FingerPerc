@@ -10,7 +10,7 @@ class V1LayerZone(
     private val layerCountOfZone: Int,
     val screenDimensions: ScreenDimensions
 ) : LayerZone {
-    lateinit var zoneLimits: ZoneLimits
+    private var zoneLimits: ZoneLimits
 
     init {
         zoneLimits = calculateLimits()
@@ -27,6 +27,10 @@ class V1LayerZone(
 
     override fun getLayerIteration(): Int {
         return layerIteration
+    }
+
+    override fun getLimits(): ZoneLimits {
+        return zoneLimits
     }
 
     private fun calculateLimits(): ZoneLimits{

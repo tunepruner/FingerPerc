@@ -38,7 +38,7 @@ class ResourceManager(val context: Context) {
         return FileSnapshot(
             fileName,
             fileNameMembers[0].toInt(),
-            fileNameMembers[1].toInt() - 9,
+            fileNameMembers[1].toInt(),
             fileNameMembers[2].toInt(),
             lastMemberWithoutExtension[0],
             assetFileDescriptor

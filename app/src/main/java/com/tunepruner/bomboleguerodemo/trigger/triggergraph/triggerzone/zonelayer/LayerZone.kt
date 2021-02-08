@@ -8,4 +8,5 @@ interface LayerZone{
     abstract fun getZoneIteration(): Int
 
     fun getLayerIteration(): Int
+    fun getLimits(): ZoneLimits
 }

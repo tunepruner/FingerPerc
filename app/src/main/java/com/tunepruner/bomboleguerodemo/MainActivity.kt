@@ -1,22 +1,64 @@
 package com.tunepruner.bomboleguerodemo
 
+import android.app.Activity
+import android.graphics.Point
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.tunepruner.bomboleguerodemo.instrument.Instrument
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var playableArea: PlayableArea
+    lateinit var instrument: Instrument
 
-
-//    var playerBuilder2: SimpleExoPlayer.Builder = SimpleExoPlayer.Builder(activity)
-//    var player2: ExoPlayer = playerBuilder2.build()
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        val point = Point()
+        point.x = event.x.toInt()
+        point.y = event.y.toInt()
+        instrument.onTouch(event)
+        return true
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        instrument = instrumentFactory(this)
         super.onCreate(savedInstanceState)
-        playableArea = PlayableArea(this)
-        setContentView(playableArea)
+//        setContentView(instrument.playableArea)
+        setContentView(R.layout.playable_area)
+
+//        var myView = MyView(this)
+//        setContentView(myView)
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) hideSystemUI()
+    }
+
+    private fun hideSystemUI() {
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE
+                // Set the content to appear under the system bars so that the
+                // content doesn't resize when the system bars hide and show.
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                // Hide the nav bar and status bar
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+    }
+
+    // Shows the system bars by removing all the flags
+// except for the ones that make the content appear under the system bars.
+    private fun showSystemUI() {
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
 }
 
-
-
+fun instrumentFactory(activity: Activity): Instrument {
+    return Instrument(activity)
+}

@@ -12,8 +12,7 @@ class V1TriggerZone(
     val screenDimensions: ScreenDimensions
 ) : TriggerZone {
     private val layerZones: LinkedList<LayerZone> = LinkedList<LayerZone>()
-
-    lateinit var zoneLimits: ZoneLimits
+    private var zoneLimits: ZoneLimits
 
     init {
         zoneLimits = calculateLimits(zoneCount, zoneIteration)
@@ -53,5 +52,9 @@ class V1TriggerZone(
 
     override fun getLayer(zoneLayer: Int): LayerZone {
         return layerZones[zoneLayer-1]
+    }
+
+    override fun getLimits(): ZoneLimits{
+        return zoneLimits
     }
 }

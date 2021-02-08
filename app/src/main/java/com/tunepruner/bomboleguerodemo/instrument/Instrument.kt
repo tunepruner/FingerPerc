@@ -13,7 +13,8 @@ import com.tunepruner.bomboleguerodemo.trigger.triggergraph.TriggerGraph
 
 class Instrument(private val activity: Activity) {
     private var player: Player
-    private var resourceManager: ResourceManager = ResourceManager(activity)
+    private var resourceManager = ResourceManager(activity)
+
 
     init {
         val touchLogic: TouchLogic = SimpleTouchLogic()
@@ -31,6 +32,7 @@ class Instrument(private val activity: Activity) {
         val sampleManager: SampleManager = SimpleSampleManager(sampleLibrary)
 
         player = PlayerFactory.getInstance(touchLogic, triggerManager, sampleManager)
+
     }
 
     fun onTouch(event: MotionEvent) {

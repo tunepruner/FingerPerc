@@ -3,15 +3,16 @@ package com.tunepruner.bomboleguerodemo.trigger.triggergraph
 import android.graphics.PointF
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.TriggerZone
 import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.LayerZone
+import com.tunepruner.bomboleguerodemo.trigger.triggergraph.triggerzone.zonelayer.ZoneLimits
 import java.util.LinkedList;
 
 class V1TriggerGraph : TriggerGraph {
-    val zones: LinkedList<TriggerZone> = LinkedList<TriggerZone>()
+    private val triggerZones: LinkedList<TriggerZone> = LinkedList<TriggerZone>()
 
     override fun invokeLayer(pointF: PointF): LayerZone {
 
         var triggerZone: TriggerZone? = null
-        for (element in zones) {
+        for (element in triggerZones) {
             if (element.isMatch(pointF)) {
                 triggerZone = element
             }
@@ -21,10 +22,18 @@ class V1TriggerGraph : TriggerGraph {
     }
 
     override fun getLayer(triggerZone: Int, zoneLayer: Int): LayerZone {
-        return zones[triggerZone-1].getLayer(zoneLayer)
+        return triggerZones[triggerZone-1].getLayer(zoneLayer)
     }
 
     override fun addTriggerZone(triggerZone: TriggerZone) {
-        zones.add(triggerZone)
+        triggerZones.add(triggerZone)
+    }
+
+    override fun getZoneLimits(): ArrayList<ZoneLimits>{
+        var zoneLimits = ArrayList<ZoneLimits>()
+        for (i in 0 until triggerZones.size) {
+            zoneLimits.add(triggerZones[i].getLimits())
+        }
+        return zoneLimits
     }
 }
