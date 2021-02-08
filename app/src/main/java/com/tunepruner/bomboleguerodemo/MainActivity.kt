@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         instrument = instrumentFactory(this)
         super.onCreate(savedInstanceState)
 //        setContentView(instrument.playableArea)
-        setContentView(R.layout.playable_area)
+        setContentView(R.layout.playable_area_2)
 
 //        var myView = MyView(this)
 //        setContentView(myView)
