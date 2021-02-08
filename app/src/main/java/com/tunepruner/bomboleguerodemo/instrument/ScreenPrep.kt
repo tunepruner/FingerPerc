@@ -27,9 +27,9 @@ class ScreenPrep {
         private fun getHeight(activity: Activity): Int {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val windowMetrics = activity.windowManager.currentWindowMetrics
-                val insets: Insets = windowMetrics.windowInsets
-                    .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
-                windowMetrics.bounds.height() - insets.top - insets.bottom
+                /*val insets: Insets = windowMetrics.windowInsets
+                    .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())*/
+                windowMetrics.bounds.height()/* - insets.top - insets.bottom*/
             } else {
                 val displayMetrics = DisplayMetrics()
                 activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
